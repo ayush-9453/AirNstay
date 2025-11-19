@@ -1,0 +1,272 @@
+<!-- Admin Dashboard Holder -->
+<div class="admin-dashboard-page d-flex flex-column">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top navbar-light p-3 bg-light shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bolder text-primary">airNstay</a>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav text-center">
+          <li>
+            <h3>Admin Dashboard</h3>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <button class="btn btn-white" (click)="logoutAdmin()">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Log Out</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard_holder" *ngIf="dispDashboard==true">
+    <!-- Filter Options -->
+    <div class="filterOptions d-flex">
+      <div class="searchFilter mx-3">
+        <span class="">Search by Id:
+          <input type="text" placeholder="Enter User Id" [(ngModel)]="userId" (ngModelChange)="searchFilter()">
+        </span>
+        <span class="mx-4">Search by Name:
+          <input type="text" placeholder="Enter Name" [(ngModel)]="userName" (ngModelChange)="searchFilter()">
+        </span>
+        <label for="roleFilter">Filter: &nbsp; </label>
+        <select id="roleFilter" [(ngModel)]="selectedRole" (ngModelChange)="applyFilter(selectedRole)">
+          <option value="All" selected>All</option>
+          <option value="Admin">Admin</option>
+          <option value="Travel Agent">Travel Agent</option>
+          <option value="Traveller">Traveller</option>
+          <option value="Support Agent">Support Agent</option>
+        </select>
+
+        <button class="btn btn-sm mx-4 btn-outline-primary" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#AddUser" >Add User</button>
+
+        <button class="btn btn-sm mx-4 btn-outline-primary" style="border-radius: 10px;"
+          (click)="changeDashboard()">Support Ticket Request</button>
+      </div>
+    </div>
+
+    <!-- Dashboard Table -->
+    <table class="mx-5" id="dashboardTable" style="width: 90%;">
+      <thead>
+        <tr>
+          <th>User Id</th>
+          <th>Name</th>
+          <th>Email Id</th>
+          <th>Role</th>
+          <th>Contact</th>
+          <th>Edit Details / Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of UserbyRoles">
+          <td>{{user.userID}}</td>
+          <td>{{user.uname}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.role}}</td>
+          <td>{{user.contactNumber}}</td>
+          <td><span>
+              <button type="button" class="btn btn-outline-primary btn-sm" title="Edit" data-bs-toggle="modal"
+                data-bs-target="#editDetails" (click)="editRecord(user)"><i class="bi bi-pencil-square"></i></button>
+            </span> &nbsp;
+            <span *ngIf="!(user.role=='Admin')">
+              <button class="btn btn-outline-danger btn-sm" title="Delete" (click)="deleteUser(user.userID)"><i
+                  class="bi bi-trash3-fill"></i></button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Edit User Modal -->
+    <div class="modal fade " id="editDetails" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header" style="background-color: #415A77; color: white;">
+            <h5 class="modal-title" id="exampleModalLabel">Edit User Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <br>
+            <form [formGroup]="editProfileForm" (ngSubmit)="editUserDetail()">
+              <label for="id">User ID: </label> &nbsp;
+              <input type="string" formControlName="id"> &nbsp; &nbsp;
+
+              <label for="name">Name: </label> &nbsp;
+              <input type="text" formControlName="name"> &nbsp;
+              <span class="error-space text-danger"
+                *ngIf="name?.errors?.['required'] && (name?.dirty || name?.touched)">
+                Name Cannot be Empty
+              </span>
+              <br><br>
+
+              <label for="email">Email: </label> &nbsp;
+              <input type="email" formControlName="email"> &nbsp;
+              <span class="text-danger error-space"
+                *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)">
+                Email Cannot be Empty
+              </span>
+              <span class="text-danger error-space"
+                *ngIf="!(email?.errors?.['required']) && (email?.errors?.['email']) && (email?.dirty || email?.touched)">
+                Invalid Email Format
+              </span>
+              <br><br>
+
+              <label for="contactNumber">Contact Number: </label> &nbsp;
+              <input type="number" formControlName="contactNumber"> &nbsp;
+              <span class="text-danger error-space"
+                *ngIf="contactNumber?.errors?.['invalidLength'] && (contactNumber?.dirty || contactNumber?.touched)">
+                Contact Number must be of 10 Digit
+              </span>
+              <br><br>
+
+              <div *ngIf="(editProfileForm.get('role')?.value!='Admin')">
+                <label for="role">Role: </label> &nbsp;
+                <select formControlName="role">
+                  <option value="Travel Agent">Travel Agent</option>
+                  <option value="Traveller">Traveller</option>
+                  <option value="Support Agent">Support Agent</option>
+                </select>
+              </div>
+              <br><br>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" id="close-btn">Close</button>
+            <button type="submit" class="btn btn-sm btn-success" (click)="editUserDetail()"
+              [disabled]="editProfileForm.invalid">Save changes</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Add User Modal -->
+       <div class="modal fade " id="AddUser" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header" style="background-color: #415A77; color: white;">
+            <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <br>
+            <form [formGroup]="addUserForm" (ngSubmit)="addNewUser()">
+
+              <label for="nName">Name: </label> &nbsp;
+              <input type="text" formControlName="nName" placeholder="Enter Name"> &nbsp;
+              <span class="error-space text-danger"
+                *ngIf="nName?.errors?.['required'] && (nName?.dirty || nName?.touched)">
+                Name Cannot be Empty
+              </span>
+              <br><br>
+
+              <label for="nEmail">Email: </label> &nbsp;
+              <input type="email" formControlName="nEmail" placeholder="Enter Email ID"> &nbsp;
+              <span class="text-danger error-space"
+                *ngIf="nEmail?.errors?.['required'] && (nEmail?.dirty || nEmail?.touched)">
+                Email Cannot be Empty
+              </span>
+              <span class="text-danger error-space"
+                *ngIf="!(nEmail?.errors?.['required']) && (nEmail?.errors?.['email']) && (nEmail?.dirty || nEmail?.touched)">
+                Invalid Email Format
+              </span>
+              <br><br>
+
+              <label for="nPassword">Password: </label> &nbsp;
+              <input type="password" formControlName="nPassword" placeholder="Enter Password"> &nbsp;
+              <span class="text-danger error-space"
+                *ngIf="nPassword?.errors?.['required'] && (nPassword?.dirty || nPassword?.touched)">
+                Password Cannot be Empty
+              </span>
+              <span class="text-danger error-space"
+                *ngIf="!(nPassword?.errors?.['required']) && (nPassword?.errors?.['minlength']) && (nPassword?.dirty || nPassword?.touched)">
+                Minimum length of Password is 8.
+              </span>
+              <br><br>
+
+              <label for="nContactNumber">Contact Number: </label> &nbsp;
+              <input type="number" formControlName="nContactNumber" placeholder="Enter Contact Number"> &nbsp;
+              <span class="text-danger error-space"
+                *ngIf="nContactNumber?.errors?.['invalidLength'] && (nContactNumber?.dirty || nContactNumber?.touched)">
+                Contact Number must be of 10 Digit
+              </span>
+              <br><br>
+
+              <div>
+                <label for="nRole">Role: </label> &nbsp;
+                <select formControlName="nRole" >
+                  <option value="Travel Agent">Travel Agent</option>
+                  <option value="Support Agent">Support Agent</option>
+                </select>
+                <span class="error-space text-danger"
+                  *ngIf="nRole?.errors?.['required'] && (nRole?.dirty || nRole?.touched)">
+                  Select a User Role
+                </span>
+              </div>
+              <br><br>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" id="add-close-btn">Close</button>
+            <button type="submit" class="btn btn-sm btn-success" (click)="addNewUser()"
+              [disabled]="addUserForm.invalid">Add User</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  <!-- Support Ticket Section Dashboard -->
+
+  <div *ngIf="dispDashboard==false" class="customer-support-ticket"
+    style="background-color: #f4f6f8; min-height: 90vh;">
+    <button class="btn btn-sm mx-5 my-3 btn-outline-primary" (click)="changeDashboard()">Show Admin Dashboard</button>
+
+    <div class="card-container">
+      <div class="ticket-card" *ngFor="let ticket of SupportTicketData">
+
+        <div class="card-header">
+          Ticket #{{ ticket.ticketId }}
+        </div>
+
+        <div class="card-content">
+          <p><strong>Customer ID:</strong> {{ ticket.userID }}</p>
+          <p><strong>Customer:</strong> {{ ticket.name }}</p>
+          <p><strong>Date:</strong> {{ ticket.date | date : 'short'}}</p>
+          <p><strong>Issue:</strong></p>
+          <div class="issue-text">
+            {{ ticket.detailedIssue }}
+          </div>
+          <p><strong>Status:</strong>&nbsp;
+            <span class="status-badge" [ngClass]="{
+          'status-pending': ticket.status === 'Pending',
+          'status-assigned': ticket.status === 'Assigned',
+          'status-completed': ticket.status === 'Completed'
+        }">
+              {{ ticket.status }}
+            </span>
+          </p>
+          <p>
+            <strong>Agent: </strong>
+            <select [(ngModel)]="ticket.agent" [disabled]="ticket.agentAssigned" (change)="assignAgent(ticket)">
+              <option value="" disabled>Unassigned</option>
+              <option *ngFor="let agent of agents" [value]="agent.userID">
+                {{ agent.userID }} - {{ agent.name }}
+              </option>
+            </select>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

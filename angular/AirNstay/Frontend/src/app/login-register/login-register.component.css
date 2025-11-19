@@ -1,0 +1,113 @@
+.content-holder{
+    background-color: #5984fa;
+    padding: 0;
+    margin: 0;
+}
+
+.carousel-holder{
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    margin: 0;
+}
+.carousel-item {
+    height: 100vh;
+}
+.carousel-item img {
+    object-fit: cover;
+    height: 100%;
+}
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 12px 20px;
+  border-radius: 20px;
+  color: #fff;
+  animation: fadeIn 1s ease-in-out;
+}
+.carousel-caption:hover{
+    cursor: pointer;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-register-holder{
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    justify-content: center;
+    color: black;
+}
+
+.login-form-holder input{
+    border: none;
+    border-bottom: 1px solid white;
+    margin-top: 8px;
+    color: white;
+    background-color: transparent !important;
+    width: 85%;
+}
+.login-form-holder input:focus{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid white
+}
+.login-form-holder{
+    border:1.5px solid rgba(255, 255, 255, 0.32);
+    width: 100%;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin-top: 1rem;
+    border-radius: 2rem;
+    background-color: transparent;
+    backdrop-filter: blur(130px);
+    color: white;
+}
+
+.login-page{
+    margin: 3rem 4rem;
+    height: 75%;
+    width: 26%;
+}
+
+.error-space {
+  min-height: 20px; 
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+input::placeholder{
+    color: white;
+}
+#link:hover{
+    cursor: pointer;
+}
+
+.login-form-holder select{
+    color: white;
+    margin-top: 8px;
+    background-color: transparent;
+    border: none;
+    /* text-align: center; */
+    border-bottom: 1px solid white;
+    width: 85%;
+}
+.login-form-holder select:focus{  
+    outline: none;
+}
+.login-form-holder option{
+    background-color: rgba(0, 0, 0, 0.454) ;
+}
+button{
+    margin-top: 8px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}

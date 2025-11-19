@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-light p-1 bg-light shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bolder text-primary" href="/flights">airNstay</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav text-center">
+        <li class="nav-item mx-2" role="button" routerLink="/flights" routerLinkActive="active">
+          <img src="flights.png" alt="" width="40px" height="30px">
+          <label class="nav-items">Flights</label>
+        </li>
+        <li class="nav-item mx-2" role="button" routerLink="/hotel" routerLinkActive="active">
+          <img src="hotels.png" alt="" width="40px" height="30px">
+          <label class="nav-items">Hotels</label>
+        </li>
+        <li class="nav-item mx-2" role="button" routerLink="/packages" routerLinkActive="active">
+          <img src="package.png" alt="" width="40px" height=" 30px">
+          <label class="nav-items">Packages</label>
+        </li>
+      </ul>
+    </div>
+    <div class="nav-right ">
+      <button class="btn btn-outline-primary d-flex flex-row justify-content-center align-content-center mx-3 p-1 px-2 " style="font-size: small;">
+        
+          <div *ngIf="!isLoggedIn" routerLink="/LoginRegister" routerLinkActive="active">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi p-1 bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+            <path fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+          </svg>Login/ SignUp </div>
+          <div *ngIf="isLoggedIn" routerLink="/userProfile" routerLinkActive="active">
+             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+            class="bi p-1 bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+            <path fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+          </svg> Profile </div>
+          
+      </button>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,113 @@
+<app-navbar></app-navbar>
+<div class="hero-container">
+  <div class="search-bar ">
+    <h3 class="text-white text-center text-uppercase mb-3"><b>Let us take you where <br class="d-none d-sm-block"> your
+        heart longs to be.....</b></h3>
+    <div class="input-group mb-5">
+      <span class="input-group-text bg-white bg-opacity-25 border-0 rounded-start-pill">
+        <a ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+            class="bi text-white bi-search" viewBox="0 0 16 16" (click)="onsearch()">
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+          </svg></a>
+      </span>
+      <input type="text" class="form-control bg-white bg-opacity-25 text-white border-0 rounded-sm-start-pill" [(ngModel)]="searchlocation"
+        placeholder="Search for Destination">
+      <button class="btn btn-info  rounded-end-pill text-uppercase" (click)="onsearch()">Search</button>
+    </div>
+  </div>
+</div>
+<div class="container p-3 mx-5">
+  <div class="d-flex  justify-content-center gap-3">
+    <div class="card border-0 p-5">
+      <h3 class="fw-bold"> Why choose <p class="text-primary">airNstay?</p>
+      </h3>
+    </div>
+    <!-- <div class="card p-5">
+      <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-airplane-fill"
+          viewBox="0 0 16 16">
+          <path
+            d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849" />
+        </svg>
+      </div>
+      <h6 class="fw-bold text-uppercase text-center mt-3">Transparent <br>Pricing</h6>
+    </div> -->
+    <div class="card p-5">
+      <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+          class="bi bi-house-check-fill" viewBox="0 0 16 16">
+          <path
+            d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+          <path d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293z" />
+          <path
+            d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514" />
+        </svg>
+      </div>
+      <h6 class="fw-bold text-uppercase text-center mt-3">Clean Hotel<br>Rooms</h6>
+    </div>
+    <div class="card p-5">
+      <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-telephone-fill"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+        </svg>
+      </div>
+      <h6 class="fw-bold text-uppercase text-center mt-3">24/7 <br>support</h6>
+    </div>
+    <div class="card p-5">
+      <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-fork-knife"
+          viewBox="0 0 16 16">
+          <path
+            d="M13 .5c0-.276-.226-.506-.498-.465-1.703.257-2.94 2.012-3 8.462a.5.5 0 0 0 .498.5c.56.01 1 .13 1 1.003v5.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5zM4.25 0a.25.25 0 0 1 .25.25v5.122a.128.128 0 0 0 .256.006l.233-5.14A.25.25 0 0 1 5.24 0h.522a.25.25 0 0 1 .25.238l.233 5.14a.128.128 0 0 0 .256-.006V.25A.25.25 0 0 1 6.75 0h.29a.5.5 0 0 1 .498.458l.423 5.07a1.69 1.69 0 0 1-1.059 1.711l-.053.022a.92.92 0 0 0-.58.884L6.47 15a.971.971 0 1 1-1.942 0l.202-6.855a.92.92 0 0 0-.58-.884l-.053-.022a1.69 1.69 0 0 1-1.059-1.712L3.462.458A.5.5 0 0 1 3.96 0z" />
+        </svg>
+      </div>
+      <h6 class="fw-bold text-uppercase text-center mt-3">authentic <br>food</h6>
+    </div>
+    <div class="card p-5">
+      <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-tags-fill"
+          viewBox="0 0 16 16">
+          <path
+            d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
+          <path
+            d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043z" />
+        </svg>
+      </div>
+      <h6 class="fw-bold text-uppercase text-center mt-3">Exciting <br>deals</h6>
+    </div>
+  </div>
+</div>
+
+<div class="container shadow-lg p-4 rounded-lg my-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h1 class="fw-bold">Best location to visit</h1>
+      <p>Grab best offer now!</p>
+    </div>
+    <div>
+      <!-- <button class="btn btn-outline-primary me-2" (click)="scrollLeft()">&#10094;</button>
+      <button class="btn btn-outline-primary" (click)="scrollRight()">&#10095;</button> -->
+    </div>
+  </div>
+
+  <div class="overflow-auto">
+    <div class="d-flex gap-3 flex-nowrap" #cardContainer>
+      <div class="card border-0" *ngFor="let location of locations" style="min-width: 10rem;">
+      <div role="button" class="text-decoration-none text-dark" (click)="getPackageByName(location.name)">
+  <div class="card-image-container">
+    <img [src]="location.image" class="card-img-top img-fluid rounded hover-zoom" style="height: 14rem;" [alt]="location.name" />
+    <div class="card-image-text">
+      <strong>{{ location.name }}</strong>
+    </div>
+  </div>
+  <!-- <p class="small text-muted">Starting at ₹{{ location.price }} <br> per person </p> -->
+</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

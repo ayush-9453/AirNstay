@@ -1,0 +1,304 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-primary p-3 bg-primary shadow-sm mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bolder text-primary">airNstay</a>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav text-center">
+        <li>
+          <h3>Travel Agent</h3>
+        </li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-white" (click)="logoutTravelAgent()">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Log Out</span>
+      </button>
+
+    </div>
+  </div>
+</nav>
+
+<!-- search and add button -->
+<div class="d-flex justify-content-between p-3">
+  <div class="d-flex align-items-center" style="max-width: 400px; width: 100%">
+    <span class="input-group-text rounded-0 rounded-start-pill border-end-0" id="basic-addon1"><i
+        class="bi bi-search"></i></span>
+    <input type="text" [(ngModel)]="searchLocation" class="form-control rounded-0 rounded-end-pill border-start-0"
+      style="background-color: #fff" (ngModelChange)="onSearch()" placeholder="Search by location" />
+  </div>
+  <button type="button" class="btn mx-3 btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addPackageModal"
+    (click)="onModalClose()">
+    + Add Packages
+  </button>
+</div>
+<hr />
+
+
+<!-- package card to display -->
+<div class="container-fluid my-4">
+  <div class="row g-4">
+    <div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let pkg of packagesdata">
+      <div class="card h-100 shadow-sm">
+        <div class="position-relative">
+          <img src="{{ pkg.imageUrl }}" class="card-img-top" alt="{{ pkg.title }}"
+            style="height: 200px; object-fit: cover" />
+          <div class="position-absolute top-0 end-0 m-2">
+            <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editPackageModal"
+              (click)="editPackageRecord(pkg)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deletePackage(pkg.id)">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body p-2">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="card-title mb-1">{{ pkg.title }}</h6>
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addItineraryModal"
+              (click)="openItineraryModal(pkg)">
+              <i class="bi bi-journal-plus"></i> Itinerary
+            </button>
+          </div>
+          <p class="mb-1">
+            <strong>₹{{ pkg.price | number }}</strong>
+          </p>
+          <p class="mb-1 text-capitalize">
+            <small><strong>Location:</strong> {{ pkg.location }}</small>
+          </p>
+          <p class="mb-1">
+            <small><strong>Duration:</strong> {{ pkg.duration }}</small>
+          </p>
+          <div class="mb-2">
+            <span *ngFor="let feature of pkg.features" class="badge bg-secondary me-1">{{ feature }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Packages display -->
+  <div *ngIf="packagesdata.length === 0" class="text-center">
+    <div class="alert alert-warning py-4 px-3 rounded-3 shadow-sm" role="alert">
+      <h4 class="alert-heading fw-bold text-danger">Oops! No Packages Found</h4>
+      <p class="mb-2">
+        We couldn’t find any travel packages you searched.
+      </p>
+      <hr />
+      <p class="mb-0 text-muted">
+        Try exploring other destinations or check back later for new updates.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for adding package -->
+<div class="modal fade" id="addPackageModal" tabindex="-1" aria-labelledby="addPackageLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content p-4">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addPackageLabel">Add Travel Package</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form [formGroup]="addPackagesForm">
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Title</label>
+              <input type="text" class="form-control" pattern="[a-zA-Z\s]+" formControlName="title" required />
+              <div *ngIf="addPackagesForm.get('title')?.hasError('required') && addPackagesForm.get('title')?.touched">
+                <small class="text-danger">Title is required</small>
+              </div>
+
+              <div *ngIf="addPackagesForm.get('title')?.hasError('pattern') && addPackagesForm.get('title')?.touched">
+                <small class="text-danger">Only letters are allowed</small>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Location</label>
+              <input type="text" class="form-control" pattern="[a-zA-Z\s]+" formControlName="location" required />
+              <div
+                *ngIf="addPackagesForm.get('location')?.hasError('required') && addPackagesForm.get('location')?.touched">
+                <small class="text-danger">Location is required</small>
+              </div>
+
+              <div
+                *ngIf="addPackagesForm.get('location')?.hasError('pattern') && addPackagesForm.get('location')?.touched">
+                <small class="text-danger">Only letters are allowed</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Duration</label>
+              <input type="number" class="form-control" formControlName="duration" required />
+              <div
+                *ngIf="addPackagesForm.get('duration')?.hasError('required') && addPackagesForm.get('duration')?.touched">
+                <small class="text-danger">Duration is required</small>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" formControlName="price" required />
+              <div *ngIf="addPackagesForm.get('price')?.hasError('required') && addPackagesForm.get('price')?.touched">
+                <small class="text-danger">Price is required</small>
+              </div>
+
+            </div>
+            <div class="col-12">
+              <label class="form-label">Inclusions</label>
+              <textarea class="form-control" formControlName="inclusions" rows="2"></textarea>
+            </div>
+            <div class="col-12 d-flex flex-row">
+              <label class="form-label">Features</label> <br />
+              <div *ngFor="let feature of featuresList" class="mx-2">
+                <input type="checkbox" [value]="feature" (change)="onCheckboxChange($event)" /> {{ feature}}
+              </div>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Image URL</label>
+              <input type="text" class="form-control" formControlName="imageUrl" />
+              <div
+                *ngIf="addPackagesForm.get('imageUrl')?.hasError('required') && addPackagesForm.get('imageUrl')?.touched">
+                <small class="text-danger">Image Url is required</small>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" (click)="onAddPackage()" data-bs-dismiss="modal">
+            Save
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for edit packages -->
+<div class="modal fade" id="editPackageModal" tabindex="-1" aria-labelledby="editPackageLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content p-4">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addPackageLabel">Edit Travel Package</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form [formGroup]="addPackagesForm">
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Title</label>
+              <input type="text" class="form-control" formControlName="title" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Location</label>
+              <input type="text" class="form-control" formControlName="location" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Duration</label>
+              <input type="number" class="form-control" formControlName="duration" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" formControlName="price" required />
+            </div>
+            <div class="col-12">
+              <label class="form-label">Inclusions</label>
+              <textarea class="form-control" formControlName="inclusions" rows="2"></textarea>
+            </div>
+            <div class="col-12 d-flex">
+              <label class="form-label">Features</label>
+              <div *ngFor="let feature of featuresList" class="mx-2">
+                <input type="checkbox" [checked]="features.value.includes(feature)" [value]="feature" (change)="onCheckboxChange($event)" />{{ feature }}
+              </div>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Image URL</label>
+              <input type="text" class="form-control" formControlName="imageUrl" />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" (click)="editPackage()" data-bs-dismiss="modal">
+            update Package
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Itinerary addititon -->
+<div class="modal fade" id="addItineraryModal" tabindex="-1" aria-labelledby="addItineraryModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" [formGroup]="itineraryForm">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addItineraryModalLabel">Add Image Itinerary</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="onModalClose()"></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Images -->
+        <div class="d-flex justify-content-between align-items-center ">
+          <h6>Images</h6>
+          <button class="btn btn-secondary btn-sm mb-3" (click)="addImage()"> + Image</button>
+        </div>
+
+        <div formArrayName="imagesUrls">
+          <div *ngFor="let imgCtrl of imagesUrls.controls; let i = index" class="input-group mb-2">
+            <input type="text" class="form-control" [formControlName]="i" placeholder="Image URL" />
+            <button class="btn btn-outline-danger" type="button" (click)="removeImage(i)">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Itinerary -->
+        <h5 class="mt-4">Day-wise Itinerary</h5>
+        <div formArrayName="DayItinerary">
+          <div *ngFor="let dayGroup of ItinerarysItinerary.controls; let i = index" [formGroupName]="i"
+            class="border rounded p-3 mb-3">
+            <h6 class="mb-2">Day {{ i + 1 }}</h6>
+            <input type="hidden" formControlName="day">
+
+            <input type="text" class="form-control mb-2" formControlName="title" placeholder="Title" />
+            <textarea class="form-control mb-2" formControlName="description" placeholder="Description"
+              rows="2"></textarea>
+
+            <input type="text" class="form-control mb-2" formControlName="mealsIncluded" placeholder="Meals" />
+
+            <input type="text" class="form-control mb-2" formControlName="overnightStay" placeholder="Overnight Stay" />
+
+            <input type="text" class="form-control mb-2" formControlName="highlights" placeholder="Highlights" />
+
+
+            <button class="btn btn-danger btn-sm mt-2" type="button" (click)="removeItinerary(i)">Remove Day</button>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary btn-sm my-3" (click)="addItinerary()">Add Another Day</button>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+          (click)="onModalClose()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onItinerarySubmit()"
+          data-bs-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

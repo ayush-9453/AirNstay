@@ -1,0 +1,550 @@
+<!-- header.component.html -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-4 fixed-top px-5">
+    <button class="btn btn-outline-primary" (click)="onbackbutton()"> <i class="bi bi-arrow-left"></i> Back</button>
+    <div class="ms-auto d-flex align-items-center">
+        <label for="currencySelect" class="me-2 fw-semibold">Currency:</label>
+        <select id="currencySelect" class="form-select form-select-sm w-auto" (change)="onCurrencyChange($event)">
+            <option value="INR">₹ INR</option>
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="GBP">£ GBP</option>
+        </select>
+    </div>
+</nav>
+<br>
+<div class="container-fluid py-4 bg-light main-content-container" *ngFor="let hotel of hotelLst">
+    <div class="row gx-4 pt-4">
+        <div class="col-lg-8 left-section mb-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body ">
+                    <div class="d-flex justify-content-between align-items-center mb-3 ">
+                        <div>
+                            <h5 class="card-title mb-1 fs-4 fw-bold">{{hotel.name}}</h5>
+                            <p class="card-subtitle text-muted fs-6">{{ hotel.address}} ,
+                                {{hotel.city}} , {{hotel.pincode}} , {{hotel.landmark}}</p>
+                        </div>
+                        <div class="text-end">
+                            <img class="rounded" src="{{hotel.hotelImage1}}" style="width: 120px; height: 100px;">
+                        </div>
+                    </div>
+                    <p class="text-muted fst-italic mb-2 ">{{ hotel.description }}</p>
+
+                    <hr class="my-3">
+                    <div *ngIf="showHotelDetails">
+                        <div class="row text-center bg-light">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <h6 class="fw-bold text-uppercase text-muted">Check-In</h6>
+                                <p class="mb-0 fw-semibold">{{hotelSearchDetails.checkIn}}</p>
+                            </div>
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <h6 class="fw-bold text-uppercase text-muted">Check-Out</h6>
+                                <p class="mb-0 fw-semibold">{{ hotelSearchDetails.checkOut}} </p>
+
+                            </div>
+                            <div class="col-md-4">
+                                <h6 class="fw-bold text-uppercase text-muted">Guests</h6>
+                                <p class="mb-0 fw-semibold">{{hotelSearchDetails.travellers}} Guests | 1 Night</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-3">
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-muted">Amenities</h6>
+                        <p class="fs-6 mb-0 space-y-3 amenities">{{ hotel.amenities }} </p>
+                    </div>
+                    <div class="mt-4">
+                        <div class="all-benefits">
+                            <h5 class="mb-3 text-information fw-semibold">Benefits</h5>
+                            <ul class="list-unstyled small text-muted">
+                                <li *ngIf="hotel.customerSupport > '0'" class="mb-1">
+                                    <i class="bi bi-headset text-success me-2"></i>{{ hotel.customerSupport }}
+                                </li>
+                                <li *ngIf="hotel.earlyCheckIn > '0'" class="mb-1">
+                                    <i class="bi bi-clock text-success me-2"></i>{{ hotel.earlyCheckIn }}
+                                </li>
+                                <li *ngIf="hotel.freeBreakfast > '0'" class="mb-1">
+                                    <i class="bi bi-cup-hot text-success me-2"></i>{{ hotel.freeBreakfast }}
+                                </li>
+                                <li *ngIf="hotel.flexibleCancellation > '0'" class="mb-1">
+                                    <i class="bi bi-arrow-repeat text-success me-2"></i>{{ hotel.flexibleCancellation }}
+                                </li>
+                                <li *ngIf="hotel.loyaltyRewards > '0'" class="mb-1">
+                                    <i class="bi bi-star text-success me-2"></i>{{ hotel.loyaltyRewards }}
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button type="button" class="btn btn-link text-primary text-decoration-none fw-bold"
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            View Cancellation Policy
+                        </button>
+
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Cancellation Policy</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="small text-muted text-start">
+                                            <strong>Important:</strong> This booking is non-refundable and the tariff
+                                            cannot be cancelled with zero fee.
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm ">
+                <div class="card-header bg-white p-3 collapsed">
+                    <h5 class="mb-0 fs-5 fw-semibold d-flex justify-content-between align-items-center">
+                        Guest Details
+                    </h5><br />
+                    <div class="alert alert-warning" role="alert">
+                        <p class="text-muted sm-3"><strong>Important:</strong> Enter name as mentioned on your passport
+                            or Government approved IDs.</p>
+                    </div>
+
+                    <form class="row g-3 " [formGroup]="registrationForm">
+                        <div class="col-md-4">
+                            <label for="" class="form-label">First name</label>
+                            <input type="text" class="form-control" pattern="[a-zA-Z ]*" formControlName="firstName"
+                                placeholder="First Name">
+                            <div *ngIf="firstName?.dirty || firstName?.touched">
+                                <div *ngIf="firstName?.errors?.['required']">
+                                    <h6 class="text-danger">First Name cant be empty</h6>
+                                </div>
+                                <h6 *ngIf="registrationForm.get('firstName')?.errors?.['pattern']" class="text-danger">
+                                    Only Letters are allowed
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom02" class="form-label">Last name</label>
+                            <input type="text" class="form-control" pattern="[a-zA-Z ]*" formControlName="lastName"
+                                id="validationCustom02" placeholder="Last name">
+                            <div *ngIf="lastName?.dirty || lastName?.touched">
+                                <div *ngIf="lastName?.errors?.['required']">
+                                    <h6 class="text-danger">Last Name cant be empty</h6>
+                                </div>
+                                <h6 *ngIf="registrationForm.get('lastName')?.errors?.['pattern']" class="text-danger">
+                                    Only Letters are allowed
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label label for="validationCustom04" class="form-label">Gender</label>
+                            <select id="inputGender" class="form-select" id="validationCustom04"
+                                formControlName="gender">
+                                <option value="Male " selected>Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom03" class="form-label">Age</label>
+                            <input type="number" class="form-control" id="validationCustom03" formControlName="age"
+                                placeholder="Age" />
+                            <div *ngIf="age?.touched && age?.invalid">
+                                <h6 class="text-danger" *ngIf="age?.errors?.['required']">Age is required</h6>
+                                <h6 class="text-danger" *ngIf="age?.errors?.['min']">Age is too low</h6>
+                                <h6 class="text-danger" *ngIf="age?.errors?.['max']">Age is too high</h6>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="button" (click)="saveGuest()"
+                                [disabled]="isEditMode || !registrationForm.valid"
+                                title="Please fill out all fields correctly">Add</button>&nbsp;&nbsp;
+                            <button class="btn btn-primary" type="button" (click)="saveGuest()"
+                                [disabled]="!isEditMode || registrationForm.invalid">Update</button>&nbsp;&nbsp;
+                        </div>
+                        <table class="table table-bordered " style="width: 700px;margin-left: 20px;margin-top: 30px;">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="HotelGuestLst.length > 0">
+                                <tr *ngFor="let traveller of HotelGuestLst">
+                                    <td>{{ traveller.firstName }}</td>
+                                    <td>{{ traveller.lastName }}</td>
+                                    <td>{{ traveller.age }}</td>
+                                    <td>{{traveller.gender}}</td>
+                                    <td>
+                                        <button class="btn btn-link text-success text-decoration-none fw-bold"
+                                            (click)="editRecord(traveller)">Edit</button>&nbsp;
+                                        <button class="btn btn-link text-danger text-decoration-none fw-bold"
+                                            (click)="deleteRecord(traveller.id)">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    <br />
+
+                    <hr class="my-3">
+                    <h5>Booking details will be sent to</h5><br />
+                    <form class="row g-3" [formGroup]="bookingForm">
+                        <!-- Country -->
+                        <div class="col-md-4">
+                            <label for="Country">Country</label>
+                            <select class="form-select" formControlName="country">
+                                <option>India</option>
+                                <option>USA</option>
+                                <option>UK</option>
+                                <option>Germany</option>
+                                <option>Other</option>
+                            </select>
+                            <div *ngIf="bookingForm.get('country')?.touched && bookingForm.get('country')?.invalid">
+                                <small class="text-danger">Country selection is required</small>
+                            </div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="col-md-4">
+                            <label for="phone">Phone Number</label>
+                            <input type="number" class="form-control" id="phone" formControlName="phone">
+                            <div *ngIf="bookingForm.get('phone')?.touched && bookingForm.get('phone')?.invalid">
+                                <small class="text-danger" *ngIf="bookingForm.get('phone')?.errors?.['required']">Phone
+                                    number is
+                                    required</small>
+                                <small class="text-danger" *ngIf="bookingForm.get('phone')?.errors?.['pattern']">Enter a
+                                    valid 10-digit
+                                    number</small>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col-md-4">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" formControlName="email"
+                                placeholder="you&#64;example.com">
+                            <div *ngIf="bookingForm.get('email')?.touched && bookingForm.get('email')?.invalid">
+                                <small class="text-danger" *ngIf="bookingForm.get('email')?.errors?.['required']">Email
+                                    is
+                                    required</small>
+                                <small class="text-danger" *ngIf="bookingForm.get('email')?.errors?.['email']">Enter a
+                                    valid email
+                                    address</small>
+                            </div>
+                        </div>
+                    </form>
+                    <br><br>
+
+
+                    <div class="card shadow-sm cancellation-policy-panel rounded">
+                        <div class="card-header bg-white p-3 collapsed">
+
+                            <form [formGroup]="termsForm">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input custom-checkbox"
+                                        formControlName="termsAccepted" id="termsAccepted">
+                                    <label class="form-check-label" for="termsAccepted">
+                                        I understand and agree with the
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#fareRulesModal">Fare
+                                            Rules</a>, the
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy
+                                            Policy</a> and
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms &
+                                            Conditions</a> of AirNStay.
+                                    </label>
+                                </div>
+
+                                <div
+                                    *ngIf="termsForm.get('termsAccepted')?.touched && termsForm.get('termsAccepted')?.invalid">
+                                    <small class="text-danger">You must accept the terms to proceed.</small>
+                                </div>
+
+                                <br>
+                            </form>
+
+                            <button class="btn btn-primary btn-lg rounded-pill shadow px-4 py-2 hover-effect"
+                                [disabled]="isDisabled" [ngClass]="{ 'btn-disabled': isDisabled }"
+                                (click)="makePayment()">
+                                Proceed to Pay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4 right-section ">
+            <div class="fixedpos">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3 fs-5 fw-semibold">Price Breakup</h5>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted fs-6">
+                                {{ roomsRequired }} Room{{ roomsRequired > 1 ? 's' : '' }} x 1 Night
+                            </span>
+                            <span class="fw-semibold fs-6">
+                                {{ totalAdultFare | currencyConverter:selectedCurrency }}
+                            </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted fs-6">Taxes and Surcharges</span>
+                            <span class="fw-semibold fs-6">
+                                {{ taxes | currencyConverter:selectedCurrency }}
+                            </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-3 text-success fw-semibold"
+                            *ngIf="selectedCouponDiscount > 0">
+                            <span class="fs-6">Coupon Applied ({{ selectedCouponCode }})</span>
+                            <span class="fs-6">
+                                -{{ selectedCouponDiscount | currencyConverter:selectedCurrency }}
+
+                            </span>
+                            <span> <button class="btn btn-sm btn-link text-danger"
+                                    (click)="removeCoupon()">Remove</button></span>
+                        </div>
+
+                        <hr class="my-3" />
+                        <div class="d-flex justify-content-between align-items-center fw-bold fs-5">
+                            <span>Total Amount</span>
+                            <span>{{ totalAmount | currencyConverter:selectedCurrency }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="scroll-div-auto ">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3 fs-5 fw-semibold">Coupons and Offers</h5>
+                            <div class="input-group mb-3 input-container">
+                                <input type="text" [(ngModel)]="manualCouponCode" placeholder="Enter coupon code">
+                                <button class="btn btn-primary rounded" (click)="applyManualCoupon()">APPLY</button>
+
+                            </div>
+
+                            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-1">AVAILUPI<span
+                                                class="text-success text-end fw-bold ">
+                                                ₹300 off</span>
+                                        </h5>
+                                        <p class="card-text text-muted small">Get an instant discount of ₹ 300 on your
+                                            flight and hotel
+                                            booking via UPI</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <button class="btn btn-link text-primary text-decoration-none fw-bold"
+                                            (click)="applyCoupon('AVAILUPI', 300)"> Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-1">FLAT350<span class="text-success text-end fw-bold">
+                                                ₹350 off</span></h5>
+                                        <p class="card-text text-muted small">Get an instant discount of upto ₹ 350 on
+                                            your flight and hotel
+                                            booking via Cards, Net Banking</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <button class="btn btn-link text-primary text-decoration-none fw-bold"
+                                            (click)="applyCoupon('FLAT350', 350)">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-1">HDFC<span class="text-success text-end fw-bold ">
+                                                ₹1000 off</span>
+                                        </h5>
+                                        <p class="card-text text-muted small">Get an instant discount of upto ₹ 1000 on
+                                            your flight and
+                                            hotel booking via HDFC Credit Card</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <button class="btn btn-link text-primary text-decoration-none fw-bold"
+                                            (click)="applyCoupon('HDFC',1000)">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-1">NEW500<span class="text-success text-end fw-bold ">
+                                                ₹500 off</span></h5>
+                                        <p class="card-text text-muted small">Get an instant discount of ₹ 500 on your
+                                            flight and hotel
+                                            booking to new users.</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <button class="btn btn-link text-primary text-decoration-none fw-bold"
+                                            (click)="applyCoupon('NEW500', 500)">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modals for terms-->
+<div class="modal fade" id="fareRulesModal" tabindex="-1" aria-labelledby="fareRulesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content border-success shadow">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="fareRulesLabel">Fare Rules – Hotel Bookings</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p class="mb-3">Please review the following fare rules carefully before confirming your hotel booking
+                    with AirNStay:</p>
+
+                <h6 class="text-success">🛏️ Room Types</h6>
+                <ul>
+                    <li><strong>Standard Room:</strong> Basic amenities, ideal for short stays.</li>
+                    <li><strong>Deluxe Room:</strong> Includes premium bedding and enhanced services.</li>
+                    <li><strong>Suite:</strong> Spacious layout with living area, ideal for families or extended stays.
+                    </li>
+                </ul>
+
+                <h6 class="text-success mt-4">🔄 Cancellation & Modification Policy</h6>
+                <ul>
+                    <li>Free cancellation up to 48 hours before check-in.</li>
+                    <li>Late cancellations may incur one-night charges.</li>
+                    <li>Modifications are subject to availability and may affect pricing.</li>
+                    <li>No-show results in full booking charge.</li>
+                </ul>
+
+                <h6 class="text-success mt-4">🕒 Check-in & Check-out</h6>
+                <ul>
+                    <li>Standard check-in time: 2:00 PM onwards.</li>
+                    <li>Standard check-out time: 11:00 AM.</li>
+                    <li>Early check-in or late check-out may incur additional charges.</li>
+                </ul>
+
+                <h6 class="text-success mt-4">👥 Guest Policy</h6>
+                <ul>
+                    <li>Valid ID is required for all guests at check-in.</li>
+                    <li>Maximum occupancy per room is strictly enforced.</li>
+                    <li>Unregistered guests are not permitted after 10:00 PM.</li>
+                </ul>
+
+                <p class="mt-4">By proceeding, you confirm that you understand and accept these hotel fare conditions.
+                    For property-specific policies, please refer to the hotel’s official website or contact support.</p>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content border-secondary shadow">
+            <div class="modal-header bg-secondary text-white">
+                <h5 class="modal-title" id="privacyPolicyLabel">Privacy Policy – AirNStay</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p>AirNStay values your privacy. This policy outlines how we handle your personal information during
+                    hotel bookings.</p>
+
+                <h6 class="text-secondary">📋 Information We Collect</h6>
+                <ul>
+                    <li>Guest names, contact details, and payment information.</li>
+                    <li>Hotel preferences, loyalty program data, and special requests.</li>
+                    <li>Device and location data for personalization and fraud prevention.</li>
+                </ul>
+
+                <h6 class="text-secondary mt-4">🔐 Usage of Data</h6>
+                <ul>
+                    <li>To confirm reservations and communicate with hotels.</li>
+                    <li>To personalize your stay and offer tailored recommendations.</li>
+                    <li>To comply with local laws and hotel regulations.</li>
+                </ul>
+
+                <h6 class="text-secondary mt-4">🤝 Third-Party Sharing</h6>
+                <ul>
+                    <li>Data is shared only with the booked hotel and payment processors.</li>
+                    <li>We do not sell or rent your data to third parties.</li>
+                </ul>
+
+                <p class="mt-4">You may request data access or deletion by contacting our support team. For full
+                    details, refer to our downloadable Privacy Policy PDF.</p>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content border-dark shadow">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="termsLabel">Terms & Conditions – Hotel Bookings</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <h6 class="text-dark">📌 General Terms</h6>
+                <ul>
+                    <li>By booking through AirNStay, you agree to the hotel’s individual policies and our platform
+                        terms.</li>
+                    <li>All payments must be completed before check-in unless otherwise stated.</li>
+                    <li>AirNStay is not liable for service quality or disputes arising at the property.</li>
+                </ul>
+
+                <h6 class="text-dark mt-4">🏨 Hotel-Specific Terms</h6>
+                <ul>
+                    <li>Each hotel sets its own cancellation, check-in, and guest policies.</li>
+                    <li>Room upgrades are subject to availability and may incur extra charges.</li>
+                    <li>Damage to property may result in penalties charged to the guest.</li>
+                </ul>
+
+                <h6 class="text-dark mt-4">👤 Guest Responsibilities</h6>
+                <ul>
+                    <li>Guests must present valid ID and booking confirmation at check-in.</li>
+                    <li>Respect for property rules and staff is mandatory.</li>
+                    <li>Illegal activities or disturbances may result in eviction without refund.</li>
+                </ul>
+
+                <p class="mt-4">These terms are subject to change. Please review them before each booking. For legal
+                    inquiries, contact legal &#64;airnstay.com.</p>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<app-navbar></app-navbar>
+
+<body>
+    <div class="bg">
+        <img class="bgImage" src="hotelBg.jpg" alt="">
+
+        <div class="container">
+            <div class="search">
+                <h2 class="form-head text-center">
+                    Book Domestic and International Hotels
+                </h2>
+                <form class="d-flex" id="searchHotelsForm" [formGroup]="searchHotelsForm" (submit)="searchHotels()">
+                    <table class="table table-hover d-flex flex-row mx-3 py-3 fs-5">
+                        <tr class="table-details">
+                            <td><strong class="bg-transparent">City</strong></td>
+                            <td>
+                                <input class="place" type="text" placeholder="Destination" formControlName="city" />
+
+                                <div class="error-container">
+                                    <div *ngIf="searchHotelsForm.get('city')?.errors?.['pattern'] && searchHotelsForm.get('city')?.touched"
+                                        class="text-danger  bg-transparent" style="font-size:small;">
+                                        Only letters are allowed.
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr class="table-details">
+                            <td><strong class="bg-transparent">Check_In</strong></td>
+                            <td>
+                                <input class="date bg-transparent fs-5" type="date" placeholder=""
+                                    formControlName="checkIn" />
+                            </td>
+                        </tr>
+                        <tr class="table-details">
+                            <td><strong class="bg-transparent">Check_Out</strong></td>
+                            <td>
+                                <input class="date bg-transparent fs-5" type="date" placeholder=""
+                                    formControlName="checkOut" />
+                            </td>
+                        </tr>
+                        <tr class="table-details">
+                            <td class="fs-5"><strong class="bg-transparent">Travellers</strong></td>
+                            <td class="fs-5">
+                                <input class="border border-0 bg-transparent" type="number" formControlName="travellers"
+                                    placeholder="Number of Traveller"
+                                    style="width: 170px; font-weight: 400; margin-right: 20px; font-size: small;">
+
+                                <div class="error-container">
+                                    <div *ngIf="searchHotelsForm.get('travellers')?.errors?.['min'] && searchHotelsForm.get('travellers')?.touched"
+                                        class="text-danger bg-transparent error-message" style="font-size:small;">
+                                        Positive Numbers allowed.
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="search-button bg-black btn text-white" type="submit"
+                        style="width: 170px; height: 140px; align-items: center;">
+                        <strong>Search</strong>
+                    </button>
+                </form>
+            </div>
+            <h2 class="p-3 text-black bg-white m-0" *ngIf="length == 0">No Hotels are Available for this Location</h2>
+            <div class="bg-white p-2" *ngIf="length > 0">
+                <h2 class="px-3 text-black">Hotel Search Results</h2>
+
+                <div class="hotel-container">
+                    <div class="hotels" *ngFor="let hotel of hotelLst">
+                        <img src={{hotel.hotelImage1}} alt="hotel" width="300px" height="200px">
+                        <div class="hotel-details">
+                            <h5 class="fw-bold text-black">{{hotel.name}} </h5>
+                            <p class="text-black">City : {{hotel.city}}</p>
+                            <p class="text-black">{{hotel.pricePerNight | currency : 'INR':'symbol':'1.0-0'}}</p>
+                            <button class="btn btn-primary fw-bold" (click)="sendToBooking(hotel.hotelId)">Book
+                                Now</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <h2 class="m-5 px-5" [ngClass]="length > 0 ? 'text-black' : 'text-white' ">Best Offers</h2>
+        <div class="d-flex flex-row gap-5" style="margin-inline: 100px; justify-content: center;">
+            <div class="card" style="width: 22rem; height: fit-content;">
+                <img src="icons/offerFlight.avif" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Domestic Flights</h5>
+                    <p class="card-text">Get up to 20% off on domestic flights.</p>
+                    <a href="/flights" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+            <div class="card" style="width: 22rem; height: fit-content;">
+                <img src="icons/offerHotel.avif" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Domestic Hotels</h5>
+                    <p class="card-text">Book luxury hotels worldwide.</p>
+                    <a href="/hotel" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+            <div class="card" style="width: 22rem; height: fit-content;">
+                <img src="icons/offerPackage.avif" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Holiday Packages</h5>
+                    <p class="card-text">Exclusive deals on holiday packages.</p>
+                    <a href="/packages" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+        <h4 class=" m-4 mt-5 px-5 fw-bold mx-5 ">Handpicked Collections for You</h4>
+        <div class="places d-flex flex-row gap-5 " style=" justify-content: center;">
+            <div class="hotel1">
+                <h5 class="text-white ">Stays in & Around Delhi</h5>
+            </div>
+            <div class="hotel2">
+                <h5 class="text-white ">Stays in & Around Mumbai</h5>
+            </div>
+            <div class="hotel3">
+                <h5 class="text-white ">Stays in & Around Bangalore</h5>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<app-footer></app-footer>

@@ -1,0 +1,478 @@
+<app-navbar></app-navbar>
+
+<div class="d-flex flex-column">
+    <div class="d-flex">
+        <div class="d-flex flex-column border rounded" style="height:90vh;">
+            <div class="rounded px-2" style="width: 17rem; height: 27.5rem;">
+                <h4 class="m-4 text-center"><b>My Account</b></h4>
+                <hr>
+                <div class="card styled-box m-2 border-0 rounded-3" [ngClass]="{'box-selected': MyProfile}"
+                    (click)="GotMyProfile()">
+                    <div class="card-body d-flex flex-wrap">
+                        <i class="bi bi-person-circle fs-5 me-3"></i>
+                        <label for="myporfile">My Profile</label>
+                    </div>
+                </div>
+                <div class="card styled-box m-2 border-0 rounded-3" [ngClass]="{'box-selected': bMyBooking}"
+                    id="MyBookings" (click)="goToMyBookings()">
+                    <div class="card-body d-flex flex-wrap">
+                        <i class="bi bi-ticket-fill fs-5 me-3"></i>
+                        <label for="resetpassword">My Bookings</label>
+                    </div>
+                </div>
+                <div class="card styled-box m-2 border-0 rounded-3" [ngClass]="{'box-selected': support}"
+                    (click)="GotoSupport()">
+                    <div class="card-body d-flex flex-wrap">
+                        <i class="bi bi-info-circle-fill fs-5 me-3"></i>
+                        <label for="support">Support </label>
+                    </div>
+                </div>
+                <div class="card logout-box border-0 m-2 rounded-3 ">
+                    <div class="card-body text-danger d-flex flex-wrap" (click)="UserLogout()">
+                        <b><i class="bi bi-box-arrow-in-right fs-5 me-3"></i>
+                            <label for="logout">Logout</label></b>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap rounded w-100">
+
+            <form class="user-profile-form w-100" [formGroup]="UserProfile" (submit)="UpdateUserData()"
+                *ngIf="MyProfile==true">
+
+                <header
+                    class="main-heading-vibrant p-4 mb-4 text-white d-flex justify-content-between align-items-center rounded-top">
+                    <h1 class="page-title-vibrant my-0 ms-md-5 display-6 fw-bold">
+                        <i class="bi bi-person-circle me-3"></i>My Profile
+                    </h1>
+                    <div class="save-edit-btn d-flex">
+                        <button class="btn btn-primary profile-edit-btn w-100 m-3" type="button"
+                            (click)="FormEnable()">Edit</button>
+                        <button class="btn btn-success profile-save-btn w-100 m-3" type="submit"
+                            [disabled]="isDisalbed">Save</button>
+                    </div>
+                    <img class="Airplane-logo-vibrant me-md-5"
+                        src="https://imgak.mmtcdn.com/mima/images/Desktop/flightsupport.svg" alt="Support Icon"
+                        width="100px">
+                </header>
+                <div class="myprofile d-flex flex-wrap rounded w-100">
+                    <fieldset class=" d-flex w-100" [disabled]="isDisalbed">
+                        <div class="left-side d-flex flex-column">
+                            <table>
+                                <tr>
+                                    <td><label class="fs-6 mt-3  labels-left labels-left-margin" for="uname">Name:
+                                        </label>
+                                    </td>
+                                    <td><input type="text" class="fname inputs-left-margin" name="uname"
+                                            formControlName="uname" id="name"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <p class="text-danger"
+                                            *ngIf="name?.errors?.['required'] && (name?.dirty || name?.touched)">
+                                            This filed is required!</p>
+                                        <p class="text-danger"
+                                            *ngIf="!(name?.errors?.['required'] && (name?.dirty || name?.touched))">
+                                            &nbsp;</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="fs-6 mt-3  labels-left labels-left-margin"
+                                            for="contactNumber">Mobile:
+                                        </label></td>
+                                    <td><input type="number" class="mobileNo inputs-left-margin"
+                                            formControlName="contactNumber" id="contactNumber"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <p class="text-danger"
+                                            *ngIf="contactNumber?.errors?.['required'] && (contactNumber?.dirty || contactNumber?.touched)">
+                                            This filed is required!</p>
+                                        <p class="text-danger"
+                                            *ngIf="!(contactNumber?.errors?.['required'] && (contactNumber?.dirty || contactNumber?.touched))">
+                                            &nbsp;</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="right-side d-flex flex-column ">
+                            <table>
+                                <tr>
+                                    <td><label class="fs-6 mt-3  labels-right labels-right-margin" for="email">Email:
+                                        </label>
+                                    </td>
+                                    <td><input type="text" class="email inputs-right-margin" formControlName="email"
+                                            id="email"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <p class="text-danger"
+                                            *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)">
+                                            This filed is required!</p>
+                                        <p class="text-danger"
+                                            *ngIf="!(email?.errors?.['required'] && (email?.dirty || email?.touched))">
+                                            &nbsp;</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class=" me-3 mt-3 labels-right labels-right-margin" for="gender">Gender:
+                                        </label></td>
+                                    <td> <select class="gender inputs-right-margin" formControlName="gender"
+                                            name="gender" id="gender">
+                                            <option value="">Select gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Others">Others</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <p class="text-danger"
+                                            *ngIf="gender?.errors?.['required'] && (gender?.dirty || gender?.touched)">
+                                            This filed is required!</p>
+                                        <p class="text-danger"
+                                            *ngIf="!(gender?.errors?.['required'] && (gender?.dirty || gender?.touched))">
+                                            &nbsp;</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+
+
+            <!-- This is the code for My bookings displaying section -->
+
+            <div class="container-fluid p-0" *ngIf="bMyBooking == true">
+    <header
+        class="main-heading-vibrant p-4 mb-4 text-white d-flex justify-content-between align-items-center rounded-top">
+        <h1 class="page-title-vibrant my-0 ms-md-5 display-6 fw-bold">My Booking</h1>
+        <img class="Airplane-logo-vibrant me-md-5"
+            src="https://imgak.mmtcdn.com/mima/images/Desktop/flightsupport.svg" alt="Support Icon"
+            width="100px">
+    </header>
+    <div class="bookingType">
+        <button class="btn booking" [ngClass]="bHotel == true ? 'bookingButton' : '' "
+            (click)="hotels()">Hotels</button>
+        <button class="btn booking" [ngClass]="bFlight == true ? 'bookingButton' : '' "
+            (click)="flights()">Flights</button>
+        <button class="btn booking" [ngClass]="bPackage == true ? 'bookingButton' : '' "
+            (click)="packages()" >Packages</button>
+    </div>
+    <div class="min-vh-100 bg-light">
+        <main class="container py-1">
+            
+            <section class="mt-3" *ngIf="bFlight == true">
+                <h5 class="mb-3"> Flight Reservations <span
+                        class="badge bg-secondary">{{bookedFlights.length}}</span></h5>
+                <div class="row g-3">
+                    <div class="col-md-6" *ngFor="let flight of bookedFlights">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6 class="card-title mb-0">{{flight.airline}}</h6>
+                                    <span
+                                        [ngClass]="flight.status === 'confirmed' ? 'badge bg-success' : 'badge bg-danger' ">
+                                        {{flight.status | uppercase}}
+                                    </span>
+                                </div>
+                                <div class="d-flex justify-content-between small">
+                                    <div>
+                                        <strong> {{flight.departure | titlecase}}</strong><br>
+                                        {{formatDate(flight.departureDate)}}
+                                        {{formatTime(flight.departureDate)}}
+                                    </div>
+                                    <div>
+                                        <strong>{{flight.arrival | titlecase}}</strong><br>
+                                        {{formatDate(flight.arrivalDate)}}
+                                        {{formatTime(flight.arrivalDate)}}
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-3 small">
+                                    <span>Class : <strong>{{flight.classType | titlecase}}</strong></span>
+                                    <span>Price : <strong>₹ {{flight.payment.amount}}</strong></span>
+                                </div>
+
+                                <div class="traveller-section mt-1">
+                                    <h6 class="fw-bold mb-3">Travellers</h6>
+                                    <div class="table-responsive">
+                                        <table class="table traveller-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Age</th>
+                                                    <th>Gender</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let traveller of flight.travellers">
+                                                    <td>{{ traveller.firstName }} {{ traveller.lastName }}
+                                                    </td>
+                                                    <td>{{ traveller.age }}</td>
+                                                    <td>{{ traveller.gender }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2 mt-3">
+                                    <button class="btn btn-danger btn-sm flex-fill"
+                                        (click)="cancelFlightBooking(flight.bookingId)"
+                                        [disabled]="flight.status === 'cancelled'">
+                                        Cancel
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-3" *ngIf="bHotel ==true">
+                <h5 class="mb-4">Hotel Reservations <span class="badge bg-secondary">{{bookedHotels.length}}</span></h5>
+                <div class="row g-3">
+                    <div class="col-md-6" *ngFor="let hotel of bookedHotels">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <h6 class="card-title mb-0">{{hotel.name}}</h6>
+                                    <span
+                                        [ngClass]="hotel.status === 'confirmed' ? 'badge bg-success' : 'badge bg-danger' ">
+                                        {{hotel.status | uppercase}}
+                                    </span>
+                                </div>
+                                <p class="text-muted small mb-2">{{hotel.address}} , {{hotel.city | titlecase}} </p>
+                                <div class="d-flex justify-content-between small">
+                                    <span class="fw-semibold">CheckIn : {{formatDate(hotel.checkInDate)}}</span>
+                                    <span class="fw-semibold">CheckOut : {{formatDate(hotel.checkOutDate)}}</span>
+                                </div>
+                                <div class="d-flex justify-content-between mt-3 small">
+                                    <span><strong>{{hotel.travellers.length}}</strong> guest</span>
+                                    <span class="fw-bold">₹{{hotel.payment.amount}}</span>
+                                </div>
+
+                                <div class="traveller-section mt-1">
+                                    <h6 class="fw-bold mb-3">Travellers</h6>
+                                    <div class="table-responsive">
+                                        <table class="table traveller-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Age</th>
+                                                    <th>Gender</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let traveller of hotel.travellers">
+                                                    <td>{{ traveller.firstName }} {{ traveller.lastName }}
+                                                    </td>
+                                                    <td>{{ traveller.age }}</td>
+                                                    <td>{{ traveller.gender }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <div class="d-flex gap-2 mt-3">
+                                    <button class="btn btn-danger btn-sm flex-fill"
+                                        [disabled]="hotel.status === 'cancelled'"
+                                        (click)="cancelHotelBooking(hotel.bookingId)">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-3" *ngIf="bPackage == true">
+                <h5 class="mb-4">Packages Reservations <span
+                        class="badge bg-secondary">{{bookedPackages.length}}</span></h5>
+                <div class="row g-3">
+                    <div class="col-md-6" *ngFor="let packages of bookedPackages">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <h6 class="card-title mb-0">{{packages.packageTitle}}</h6>
+                                    <span
+                                        [ngClass]="packages.status === 'confirmed' ? 'badge bg-success' : 'badge bg-danger' ">
+                                        {{packages.status | uppercase}}
+                                    </span>
+                                </div>
+                                <p class="text-muted small mb-2">{{packages.location | titlecase}}</p>
+                                <div class="d-flex justify-content-between small">
+                                    <span class="fw-semibold">Date :
+                                        {{packages.bookingDate | date : 'mediumDate'}}</span>
+                                    <span class="fw-semibold">Duration :
+                                        {{packages.duration}}</span>
+                                </div>
+                                <div class="d-flex justify-content-between mt-3 small">
+                                    <span><strong>{{packages.travellers.length}}</strong> guest(s)</span>
+                                    <span class="fw-bold">₹{{packages.payment.amount}}</span>
+                                </div>
+
+                                <div class="traveller-section mt-1">
+                                    <h6 class="fw-bold mb-3">Travellers</h6>
+                                    <div class="table-responsive">
+                                        <table class="table traveller-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Age</th>
+                                                    <th>Gender</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let traveller of packages.travellers">
+                                                    <td>{{ traveller.firstName }} {{ traveller.lastName }}
+                                                    </td>
+                                                    <td>{{ traveller.age }}</td>
+                                                    <td>{{ traveller.gender }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2 mt-3">
+                                    <button class="btn btn-danger btn-sm flex-fill"
+                                        [disabled]="packages.status === 'cancelled'"
+                                        (click)="cancelPackageBooking(packages.bookingId)">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <div class="modal fade show d-block" *ngIf="selectedBooking" tabindex="-1"
+            style="background: rgba(0,0,0,.5)">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Booking Details</h5>
+                        <button type="button" class="btn-close" (click)="closeDialog()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <pre class="bg-light p-2 small">{{selectedBooking | json}}</pre>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" (click)="closeDialog()">Close</button>
+                        <button class="btn btn-primary">Modify</button>
+                        <button class="btn btn-danger">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <div class="rounded-5 w-100 " *ngIf="support==true">
+                <header
+                    class="main-heading-vibrant p-4 mb-4 text-white d-flex justify-content-between align-items-center rounded-top">
+                    <h1 class="page-title-vibrant my-0 ms-md-5 display-6 fw-bold">Customer Support</h1>
+                    <img class="Airplane-logo-vibrant me-md-5"
+                        src="https://imgak.mmtcdn.com/mima/images/Desktop/flightsupport.svg" alt="Support Icon"
+                        width="100px">
+                </header>
+
+                <div class="d-flex justify-content-between align-items-center container">
+                    <h5 class="mx-4">My Queries</h5>
+                    <button class="btn btn-primary m-3" type="button" data-bs-toggle="modal"
+                        data-bs-target="#raiseTicketModal">
+                        + Raise query
+                    </button>
+                </div>
+
+                <div class="container" *ngIf="ticketData.length == 0">
+                    <div class="alert alert-warning mt-3" role="alert">
+                        <b class="text-danger">No active</b> support queries found.
+                    </div>
+                </div>
+                <div class="container my-4">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+                        <div class="col" *ngFor="let query of ticketData">
+                            <div class="card h-100 shadow-sm border-primary" [ngClass]="{
+                                        'border-warning': query.status === 'Pending',
+                                        'border-info': query.status === 'Assigned',
+                                        'border-success': query.status === 'Completed'
+
+                                        }">
+                                <div
+                                    class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-0 fw-bold">Query - {{ query.ticketId }}</h6>
+                                    <span class="badge bg-light text-primary py-2 px-3 fw-bold">{{ query.status}}</span>
+                                </div>
+                                <div class="card-body">
+                                    <!-- <h5 class="card-title text-primary">{{ query.name }}</h5> -->
+                                    <p class="card-text text-muted  small mb-1">
+                                        <strong>Subject:</strong> {{ query.detailedIssue }}
+                                    </p>
+                                    <p class="card-text text-muted small">
+                                        <strong>Raised On:</strong> {{ query.date | date:'mediumDate'}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="raiseTicketModal" tabindex="-1" aria-labelledby="raiseTicketModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title fw-bold" id="raiseTicketModalLabel">Raise a Support Ticket</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form [formGroup]="raiseTicket" (submit)="RaiseTicket()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="ticketName" class="form-label fw-semibold">Enter Name:</label>
+                        <input type="text" id="ticketName" class="form-control" formControlName="name"
+                            placeholder="Your Full Name">
+                        <div class="form-text text-danger" `
+                            *ngIf="name?.errors?.['required'] && (name?.dirty || name?.touched)">
+                            Please Enter Valid Name!
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="RaiseIssue" class="form-label fw-semibold">Issue:</label>
+                        <textarea class="form-control" name="RaiseIssue" id="RaiseIssue" formControlName="detailedIssue"
+                            placeholder="Describe your issue in detail." rows="4"></textarea>
+                        <div class="form-text text-danger"
+                            *ngIf="detailedIssue?.errors?.['required'] && (detailedIssue?.dirty || detailedIssue?.touched)">
+                            Please Enter the Valid Data!
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="raiseTicket.invalid"
+                        data-bs-dismiss="modal">Submit Ticket</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

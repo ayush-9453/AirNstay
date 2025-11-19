@@ -1,0 +1,17 @@
+.carousel-item img {
+    height: 30rem; /* Adjust this value as needed */
+    object-fit: cover;
+  }
+
+  .carousel-inner {
+    max-height: 30rem;
+  }
+
+.gst_tag{
+  font-size: x-small;
+}
+/* Example CSS */
+.scroll-container {
+  height: 80vh;
+  overflow-y: auto;
+}

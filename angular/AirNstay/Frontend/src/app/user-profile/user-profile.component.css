@@ -1,0 +1,343 @@
+.styled-box {
+  border: 2px solid white;
+  transition: all 0.3s ease; /* Apply transition to the base element */
+}
+
+/* The :hover pseudo-class is the "on hover function" */
+.styled-box:hover {
+  background-color:#dce9ff; /* Light red background on hover */
+  border-color:#ccc; /* Red border on hover */
+  transform: scale(1.05); 
+  cursor: pointer;
+}
+
+.box-selected{
+  background-color:#dce9ff; /* Light red background on hover */
+  border-color:#ccc; /* Red border on hover */
+  transform: scale(1.05); 
+  cursor: pointer;
+}
+
+.logout-box :hover{
+ background-color: rgb(251, 180, 180);
+  border-color:#ccc; /* Red border on hover */
+  transform: scale(1.05); 
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.fname, .email, .mobileNo {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    height: 35px;
+    border: 1px solid black;
+    background-color: rgb(245, 243, 243);
+}
+.new-password,.confirm-password{
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    height: 35px;
+    border: 1px solid black;
+    background-color: rgb(245, 243, 243);
+}
+.gender,.birth-date, .nationality, .city, .state{
+    
+    width: 100%;
+    border-radius: 10px;
+    height: 35px;
+    border: 1px solid black;
+    margin-top: 15px;
+    background-color: rgb(245, 243, 243);
+}
+.pick-gender, .pick-birthdate,.pick-nationality, .pick-city, .pick-state{
+    width: 100%;
+}
+.emailaddress, .fullname{
+    width: 45%;
+}
+.labels-left{
+    font-weight: 500;
+}
+.inputs-left{
+   
+    width: 70%;
+}
+
+.error-space {
+  min-height: 20px; 
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.labels-left-margin{
+    margin-left: 15px;
+    
+}
+.labels-right{
+    font-weight: 500;
+   
+    width: 24%;
+}
+.inputs-right{
+   width: 70%;
+}
+.labels-right-margin{
+   margin: 5px;
+
+}
+
+.left-side{
+    width: 50%;
+    margin-right: 50px;
+}
+.right-side{
+    width: 50%;
+    margin-right: 50px;
+}
+
+
+.edit-btn{
+    width: 100%;
+    height: 70px;
+}
+.profile-edit-btn{
+   width: 10%;
+
+}
+.profile-heading{
+    width: 70%;
+    margin: 7px;
+}
+
+.labels-left-reset{
+    
+    font-weight: 500;
+}
+.labels-right-reset{
+    font-weight: 500;
+  
+}
+
+.MyAccount-heading{
+    margin-bottom: 5px;
+    padding: 30px;   
+    background-color: rgb(30, 155, 244);
+    border-top-left-radius: 15px ;
+    border-top-right-radius: 15px ;
+    display: flex;
+    flex-wrap: wrap;
+}
+.profile-edit-btn{
+    background-color: #ffffff;
+    color: #1E9BF4;
+    border: 1px solid #ffffff;
+    position: relative;
+    z-index: 2;
+}
+.profile-save-btn{
+    background-color: #28a745;
+    color: #ffffff;
+    border: 1px solid #28A745;
+    position: relative;
+    z-index: 2;
+
+}
+.profile-save-btn:hover{
+    background-color: #218838;
+}
+.profile-edit-btn:hover{
+    background-color: #e0f0ff;
+}
+.icon-heading{
+    width: 70%;
+}
+.save-edit-btn{
+width: 30%;
+}
+
+.animated_check_circle svg {
+  width: 100px;
+  display: block;
+  stroke: red;
+  margin: 40px auto 0;
+}
+
+.animated_check_circle .path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+}
+
+.animated_check_circle .path.circle {
+  -webkit-animation: dash 1.9s ease-in-out;
+  animation: dash 1.9s ease-in-out;
+}
+
+.animated_check_circle .path.line {
+  stroke-dashoffset: 1000;
+  -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
+  animation: dash 0.9s 0.35s ease-in-out forwards;
+}
+
+.animated_check_circle .path.check {
+  stroke-dashoffset: -100;
+  -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
+  animation: dash-check 0.9s 0.35s ease-in-out forwards;
+}
+
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-webkit-keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}
+
+@keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}
+
+
+
+
+/* Css for my Booking Made by abhay */
+
+.booking-main{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    box-shadow: 0px 1px 10px 20px rgba(22, 51, 110, 0.1);
+    border-radius: 25px;
+
+}
+
+.top{
+    justify-items: center;
+    padding: 30px;   
+    background-color: rgb(30, 155, 244);
+    border-top-left-radius: 25px ;
+    border-top-right-radius: 25px ;
+}
+.bookingType{
+    margin: 8px;
+    padding: 5px;
+    display: flex;
+    background-color: rgb(235, 235, 235);
+    box-shadow: 0 8px 24px rgba(27, 35, 52, 0.1);
+    height: fit-content;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    gap: 5px;
+}
+.booking{
+    width: stretch;
+}
+.bookingButton{
+    background-color: white;
+    width: stretch;
+    border-radius: 10px;
+
+}
+
+
+.status-pending {
+  background-color: #ffe388;
+  color: #856404;
+}
+
+.status-assigned {
+  background-color: skyblue;
+  color: #0c5460;
+}
+
+.status-completed {
+  background-color: lightgreen;
+  color: #155724;
+}
+
+.traveller-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.traveller-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.traveller-table thead {
+  background-color: linear-gradient(90deg, #007bff, #00c6ff);
+  color: #fff;
+  font-weight: 600;
+}
+
+.traveller-table th,
+.traveller-table td {
+  text-align: center;
+  padding: 7px;
+}
+
+.traveller-table tbody tr {
+  transition: background 0.3s ease;
+}
+
+.traveller-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.traveller-table td {
+  color: #333;
+}
+
+
+
+
+.main-heading-vibrant {
+    background-image: linear-gradient(135deg,rgb(30, 155, 244) 0%,rgb(30, 155, 244) 100%); /* Deep Blue to Sky Blue */
+    min-height: 120px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.page-title-vibrant {
+    z-index: 10;
+}
+
+/* Logo positioning updated to be cleaner and slightly in the background */
+.Airplane-logo-vibrant {
+    position: absolute;
+    right: 5%;
+    bottom: -10px; /* Moves it slightly lower */
+    opacity: 0.2; /* Makes it a subtle background element */
+    width: 150px !important;
+    z-index: -2;
+}

@@ -1,0 +1,55 @@
+<div class="d-flex flex-row gap-3 justify-content-start align-items-center">
+    <button class="btn btn-primary m-3 fs-5" (click)="backToSearch()"><-Back </button>
+            <h2 class="text-center text-black my-4">Flight Search Results &nbsp;</h2>
+
+</div>
+        <div class="text-center" *ngIf="!flightLst">
+            <div class="alert alert-warning py-5 px-3 rounded-3 shadow-sm" role="alert">
+                <h2 class="alert-heading fw-bold text-danger px-4">Oops! No Flights Found</h2>
+                <h5 class="fw-bold text-black">Please check for other Routes.</h5>
+            </div>
+        </div>
+
+<div class="flight-container" *ngIf="flightLst">
+    <div class="flight-card animate-card" *ngFor="let flight of flightLst">
+        <div class="flight-header">
+            <div style="display: flex; align-items: center;">
+                <img [src]="flight.flightLogo" alt="airline logo" class="airline-logo" />
+                <div class="airline-info">
+                    <h3>{{ flight.airline }}</h3>
+                    <span class="airline-id">{{ flight.flightId }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flight-body">
+            <div class="time-section">
+                <h2>{{ flight.departureTime }}</h2>
+                <p>{{ flight.departure }}</p>
+            </div>
+
+            <div class="flight-duration">
+                <p>⏱ {{ flight.duration }}</p>
+                <div class="flight-path">
+                    <span class="dot"></span>
+                    <span class="line"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <div class="time-section">
+                <h2>{{ flight.arrivalTime }}</h2>
+                <p>{{ flight.arrival }}</p>
+            </div>
+        </div>
+
+        <div class="flight-footer">
+            <div class="price">₹ {{ flight.price }}</div>
+            <button [ngClass]="flight.availability === 'Available' ? 'book-btn' : 'sold-btn'"
+                [disabled]="flight.availability != 'Available'" (click)="goToPayment(flight.flightId)">
+                {{flight.availability == 'Available' ? 'Book Flight' : 'Sold Out'}}
+            </button>
+        </div>
+
+    </div>
+</div>

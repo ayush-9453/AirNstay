@@ -1,0 +1,231 @@
+body {
+    background: transparent;
+}
+
+.bg {
+
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding-bottom: 50px;
+    margin-top: -40px;
+}
+
+.bgImage {
+    display: flex;
+    position: absolute;
+    height: 80%;
+    width: 100%;
+    z-index: -2;
+
+}
+
+.container {
+    background-color: transparent;
+    backdrop-filter: blur(4px);
+    width: fit-content;
+    border-radius: 10px;
+    margin-top: 60px;
+    padding: 0;
+    box-shadow: 0px 1px 5cap 1px black;
+    z-index: 10;
+    color: white;
+}
+
+.search {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background: white; */
+    z-index: 10;
+    margin-inline: 50px;
+    padding-top: 10px;
+    border-radius: 10px;
+}
+
+.form-head {
+    margin-bottom: 20px;
+    font-weight: 400;
+    text-shadow: 1px 1px 1px #aaa;
+    text-transform: capitalize;
+    font-size: 25px;
+}
+
+.form-check {
+    font-size: 18px;
+    margin-bottom: 10px;
+    width: fit-content;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.table {
+    width: fit-content;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    justify-content: space-between;
+    box-shadow: 1px 2px 2px #888888;
+    background: white;
+    border: 1px solid rgb(0, 0, 0);
+    margin-bottom: 30px;
+    width: fit-content;
+
+}
+
+.table-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: start;
+    border-left: 1px solid black;
+    padding-left: 10px;
+    margin-inline: 10px;
+
+}
+
+.table>:not(:first-child) {
+    border-top: none;
+}
+
+.table-details:first-child {
+    border-left: none;
+    padding-left: 10px;
+}
+
+.place {
+    border: none;
+    outline: none;
+    width: 200px;
+    padding: 5px;
+    height: fit-content;
+    font-weight: bold;
+    background-color: transparent;
+
+}
+
+.date {
+    border: none;
+    width: 160px;
+}
+
+
+.search-button {
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: -30px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    font: 25px bolder white;
+
+
+}
+
+.book-type {
+    width: fit-content;
+    border: 2px solid rgb(12, 141, 240);
+    border-radius: 20px;
+    ;
+
+
+
+}
+
+.book-type:hover {
+    background-color: #bde1ff;
+}
+
+.hotel1 {
+    background-image: url('../../../public/icons/hotel1.avif');
+    height: 320px;
+    width: 320px;
+    background-size: cover;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    font: 20px solid white;
+    padding: 10px;
+    justify-content: end;
+}
+
+.hotel2 {
+    background-image: url('../../../public/icons/hotel2.avif');
+    height: 320px;
+    width: 320px;
+    background-size: cover;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    font: 20px solid white;
+    padding: 10px;
+    justify-content: end;
+}
+
+.hotel3 {
+    background-image: url('../../../public/icons/hotel3.avif');
+    height: 320px;
+    width: 320px;
+    background-size: cover;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    font: 20px solid white;
+    padding: 10px;
+    justify-content: end;
+}
+
+.hotel-container {
+    display: grid;
+    background-color: white;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px;
+    gap: 20px;
+
+}
+
+.hotels {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    box-shadow: 1px 2px 10px 5px rgb(195, 194, 194);
+    border-radius: 10px;
+    gap: 2px;
+
+}
+
+.hotels>img {
+    border-start-end-radius: 10px;
+    border-start-start-radius: 10px;
+
+
+}
+
+.hotel-details {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.error-container {
+    height: 0px;
+}
+
+
+.error-message {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}

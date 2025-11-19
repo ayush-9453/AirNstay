@@ -1,0 +1,731 @@
+<!-- header.component.html -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-4 fixed-top px-5">
+    <button class="btn btn-outline-primary" (click)="onbackbutton()"> <i class="bi bi-arrow-left"></i> Back</button>
+
+    <div class="ms-auto d-flex align-items-center">
+        <label for="currencySelect" class="me-2 fw-semibold">Currency:</label>
+        <select id="currencySelect" class="form-select form-select-sm w-auto" (change)="onCurrencyChange($event)">
+            <option value="INR">₹ INR</option>
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="GBP">£ GBP</option>
+        </select>
+    </div>
+</nav>
+<br>
+<div  class="container-fluid py-4 bg-light main-content-container">
+    <div class="row gx-4 pt-4" *ngFor="let flight of flightLst">
+        <div class="col-lg-8 left-section mb-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3 ">
+                        <div>
+                            <h5 class="card-title mb-1 fs-4 fw-bold">{{ flight.departure }} → {{ flight.arrival }}</h5>
+                            <p class="card-subtitle text-muted fs-6">{{flight.departureTime}} • Non Stop • {{
+                                flight.arrivalTime}}
+                            </p>
+                        </div>
+                        <div class="text-end">
+                            <p class="text-danger fw-bold mb-1 fs-7">CANCELLATION FEES APPLY</p>
+
+                            <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                View Fare Rules
+                            </button>
+
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Fare Rules</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <table class="table table-bordered table-sm text-start">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Time frame (From Scheduled flight departure)</th>
+                                                        <th>Airline Fee + AirNStay Fee (Per passenger)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>0 hours to 2 hours</td>
+                                                        <td>ADULT : Non Refundable</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>24 hours</td>
+                                                        <td>ADULT : Non Refundable</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>24 hours to 365 days</td>
+                                                        <td>ADULT : Base Fare + ₹ 300</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <p class="small text-muted text-start">
+                                                <strong>Important:</strong> The airline fee is indicative.AirNStay does
+                                                not guarantee the
+                                                accuracy of this information. All fees mentioned are per passenger. All
+                                                refunds are subject to
+                                                airline approval.
+                                            </p>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center mb-3">
+                        <img class="rounded" src="{{flight.flightLogo}}" style="width: 40px; height: 40px;">
+                        <span class="fw-semibold me-2">{{ flight.airline }} </span>&nbsp;&nbsp;&nbsp;
+                        <span class="text-muted fs-6">{{flight.classType}} Class</span>
+                    </div>
+
+                    <hr class="my-3">
+                    <div class="position-relative flight-timing-section">
+                        <div class="bg-secondary position-absolute start-0 translate-middle-x duration-line"></div>
+
+                        <div class="d-flex align-items-start mb-3">
+                            <i class="bi bi-geo-alt-fill text-primary me-2 mt-1"></i>
+                            <div>
+                                <p class="mb-0 text-dark fw-semibold fs-6">
+                                    <span class="text-capitalize">{{ flight.departure }} Airport &nbsp;</span>
+                                    <span class="text-muted">|</span>
+                                    <span class="text-secondary ms-2">
+                                        {{ flight.departureDate }}
+                                    </span>
+                                    <span class="text-muted">at</span>
+                                    <span class="fw-medium ms-1">
+                                        {{ flight.departureTime }}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="my-3 px-3">
+                            <span class="badge bg-light text-muted px-3 py-2 rounded-pill">
+                                ⏱ {{ flight.duration }}
+                            </span>
+                        </div>
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-geo-alt-fill text-primary me-2 mt-1"></i>
+                            <div>
+                                <p class="mb-0 text-dark fw-semibold fs-6">
+                                    <span class="text-capitalize">{{ flight.arrival }} Airport &nbsp;</span>
+                                    <span class="text-muted"> | </span>
+                                    <span class="text-secondary ms-2">
+                                        {{ flight.arrivalDate }}
+                                    </span>
+                                    <span class="text-muted">at</span>
+                                    <span class=" fw-medium ms-1">
+                                        {{ flight.arrivalTime }}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-dashed p-3 mt-4 rounded baggage-section">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-handbag-fill text-primary me-2"></i>
+                            <p class="mb-md-0">Cabin Baggage: 7 Kgs (1 piece only) / Adult</p>
+                        </div>
+                        <div class="d-flex align-items-center mb-2" *ngIf="flightSearchDetails === 'Regular'">
+                            <i class="bi bi-briefcase-fill text-primary me-2"></i>
+                            <p class="mb-md-0">Check-In Baggage: 15 Kgs (1 piece only) / Adult</p>
+                        </div>
+                        <div class="d-flex align-items-center mb-2" *ngIf="flightSearchDetails === 'Student' ">
+                            <i class="bi bi-briefcase-fill text-primary me-2"></i>
+                            <p class="mb-md-0">Check-In Baggage: 25 Kgs (Only for Students)</p>
+                        </div>
+                        <div class="d-flex align-items-center mb-2" *ngIf="flightSearchDetails === 'Senior Citizen' ">
+                            <i class="bi bi-briefcase-fill text-primary me-2"></i>
+                            <p class="mb-md-0">Check-In Baggage: 15 Kgs & upto ₹600 Off (Only for Senior Citizen)</p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm ">
+                <div class="card-header bg-white p-3 collapsed">
+                    <h5 class="mb-0 fs-5 fw-semibold d-flex justify-content-between align-items-center">
+                        Cancellation & Date Change Policy
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop1">
+                            View Policy
+                        </button>
+
+                        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Cancellation Policy</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body small">
+                                        <h5>1. Introduction</h5>
+                                        <p class="fs-6">This Cancellation Policy outlines the terms and conditions under
+                                            which users may
+                                            cancel their
+                                            bookings, subscriptions, or purchases made through our platform. By using
+                                            our services, you agree
+                                            to the terms stated herein.</p>
+
+                                        <h5>2. Cancellation Eligibility</h5>
+
+                                        <ul class="fs-6">
+                                            <li>The cancellation request is made within the allowable cancellation
+                                                window.</li>
+                                            <li>The booking or subscription is eligible for cancellation as per the
+                                                specific product/service
+                                                terms.</li>
+                                            <li>The user has not violated any terms of use or engaged in fraudulent
+                                                activity.</li>
+                                        </ul>
+
+                                        <h5>3. Cancellation Window</h5>
+                                        <ul class="fs-6">
+                                            <li>Bookings: Cancellations must be made at least 24 hours prior to the
+                                                scheduled
+                                                time.</li>
+                                            <li>Subscriptions:Monthly subscriptions can be canceled anytime before the
+                                                renewal date. Annual subscriptions must be canceled at least 7 days
+                                                before the renewal date.
+                                            </li>
+                                            <li>Digital Products:Once downloaded or accessed, digital products are
+                                                non-refundable and non-cancellable.</li>
+                                        </ul>
+
+                                        <h5>4. Cancellation Process</h5>
+                                        <ol class="fs-6">
+                                            <li>Log in to your account.</li>
+                                            <li>Navigate to the “My Bookings” or “Subscriptions” section.</li>
+                                            <li>Select the item you wish to cancel.</li>
+                                            <li>Click on “Cancel” and follow the on-screen instructions.</li>
+                                            <li>You will receive a confirmation email upon successful cancellation.</li>
+                                        </ol>
+
+                                        <h5>5. Refund Policy</h5>
+                                        <ul class="fs-6">
+                                            <li>Full Refunds: Provided for cancellations made within the eligible window
+                                                and
+                                                under qualifying conditions.</li>
+                                            <li>Partial Refunds: May be issued depending on the time of cancellation and
+                                                the
+                                                nature of the service.</li>
+                                            <li>No Refunds: For cancellations made outside the eligible window or for
+                                                non-refundable services/products.</li>
+                                        </ul>
+
+                                        <h5>6. Exceptions</h5>
+                                        <ul class="fs-6">
+                                            <li>Services marked as “Non-Cancellable” or “Final Sale” are not eligible
+                                                for cancellation or
+                                                refund.</li>
+                                            <li>Promotional or discounted items may have different cancellation terms,
+                                                which will be specified
+                                                at the time of purchase.</li>
+                                        </ul>
+
+                                        <h5>7. Force Majeure</h5>
+                                        <p class="fs-6">In cases of natural disasters, pandemics, or other force majeure
+                                            events,
+                                            cancellation terms may
+                                            be modified at the discretion of the company. Users will be notified of any
+                                            such changes.</p>
+
+                                        <h5>8. Dispute Resolution</h5>
+                                        <p class="fs-6">If you believe your cancellation request was unfairly denied,
+                                            you may contact our
+                                            support team.
+                                            All disputes will be handled in accordance with our Terms of Service.</p>
+
+                                        <h5>9. Policy Updates</h5>
+                                        <p class="fs-6">We reserve the right to update this Cancellation Policy at any
+                                            time. Users will be
+                                            notified of
+                                            significant changes via email or platform notifications.</p>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h5>
+                </div>
+            </div>
+            <br />
+            <div class="card shadow-sm ">
+                <div class="card-header bg-white p-3 collapsed">
+                    <h5 class="mb-0 fs-5 fw-semibold d-flex justify-content-between align-items-center">
+                        Traveller Details
+                    </h5><br />
+                    <div class="alert alert-warning" role="alert">
+                        <p class="text-muted sm-3"><strong>Important:</strong> Enter name as mentioned on your passport
+                            or Government approved IDs.</p>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input custom-radio" id="adultRadio"
+                            (change)="selectTravellerType('Adult')" [checked]="showFormAdult" />
+                        <label class="form-check-label" for="adultRadio"><strong>ADULT (13yrs+)</strong></label>
+                    </div>
+
+                    <hr class="my-3" />
+
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input custom-radio" id="childRadio"
+                            (change)="selectTravellerType('Child')" [checked]="showFormChildren" />
+                        <label class="form-check-label" for="childRadio"><strong>CHILDREN (1–12yrs)</strong></label>
+                    </div>
+
+                    <hr class="my-3" />
+
+                    <form *ngIf="showFormAdult || showFormChildren" class="row g-3 " [formGroup]="registrationForm">
+                        <div class="col-md-4">
+                            <label for="" class="form-label">First name</label>
+                            <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"
+                                pattern="[a-zA-Z ]*">
+                            <div *ngIf="firstName?.dirty || firstName?.touched">
+                                <div *ngIf="firstName?.errors?.['required']">
+                                    <h6 class="text-danger">First Name cant be empty</h6>
+                                </div>
+                                    <h6 *ngIf="registrationForm.get('firstName')?.errors?.['pattern']" class="text-danger">
+                                        Only Letters are allowed
+                                    </h6>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom02" class="form-label">Last name</label>
+                            <input type="text" class="form-control" formControlName="lastName" id="validationCustom02"
+                                placeholder="Last name" pattern="[a-zA-Z ]*">
+                            <div *ngIf="lastName?.dirty || lastName?.touched">
+                                <div *ngIf="lastName?.errors?.['required']">
+                                    <h6 class="text-danger">Last Name cant be empty</h6>
+                                </div>
+                                    <h6 *ngIf="registrationForm.get('lastName')?.errors?.['pattern']" class="text-danger">
+                                        Only Letters are allowed
+                                    </h6>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label label for="validationCustom04" class="form-label">Gender</label>
+                            <select id="inputGender" class="form-select" id="validationCustom04"
+                                formControlName="gender">
+                                <option value="Male " selected>Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom03" class="form-label">Age</label>
+                            <input type="number" class="form-control" id="validationCustom03" formControlName="age"
+                                placeholder="Age" />
+                            <div *ngIf="age?.touched && age?.invalid">
+                                <h6 class="text-danger" *ngIf="age?.errors?.['required']">Age is required</h6>
+                                <h6 class="text-danger" *ngIf="age?.errors?.['min']">Age is too low</h6>
+                                <h6 class="text-danger" *ngIf="age?.errors?.['max']">Age is too high</h6>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="button" (click)="saveTraveller()"
+                                [disabled]="isEditMode || !registrationForm.valid"
+                                title="Please fill out all fields correctly">Add</button>&nbsp;&nbsp;
+                            <button class="btn btn-primary" type="button" (click)="saveTraveller()"
+                                [disabled]="!isEditMode || registrationForm.invalid">Update</button>&nbsp;&nbsp;
+                        </div>
+                        <table class="table table-bordered " style="width: 700px;margin-left: 20px;margin-top: 30px;">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
+                                    <th>Age</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="TravellerLst.length > 0">
+                                <tr *ngFor="let traveller of TravellerLst">
+                                    <td>
+                                        <span class="badge bg-primary" *ngIf="traveller.type === 'Adult'">Adult</span>
+                                        <span class="badge bg-warning text-dark"
+                                            *ngIf="traveller.type === 'Child'">Child</span>
+                                    </td>
+                                    <td>{{ traveller.firstName }}</td>
+                                    <td>{{ traveller.lastName }}</td>
+                                    <td>{{ traveller.gender }}</td>
+                                    <td>{{ traveller.age }}</td>
+                                    <td>
+                                        <button class="btn btn-link text-success text-decoration-none fw-bold"
+                                            (click)="editRecord(traveller)">Edit</button>&nbsp;
+                                        <button class="btn btn-link text-danger text-decoration-none fw-bold"
+                                            (click)="deleteRecord(traveller.id)">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    <br />
+
+                    <hr class="my-3">
+                    <h5>Booking details will be sent to</h5><br />
+                    <form class="row g-3" [formGroup]="bookingForm">
+                        <!-- Country -->
+                        <div class="col-md-4">
+                            <label for="Country">Country</label>
+                            <select class="form-select" formControlName="country">
+                                <option>India</option>
+                                <option>USA</option>
+                                <option>UK</option>
+                                <option>Germany</option>
+                                <option>Other</option>
+                            </select>
+                            <div *ngIf="bookingForm.get('country')?.touched && bookingForm.get('country')?.invalid">
+                                <small class="text-danger">Country selection is required</small>
+                            </div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="col-md-4">
+                            <label for="phone">Phone Number</label>
+                            <input type="number" class="form-control" id="phone" formControlName="phone">
+                            <div *ngIf="bookingForm.get('phone')?.touched && bookingForm.get('phone')?.invalid">
+                                <small class="text-danger" *ngIf="bookingForm.get('phone')?.errors?.['required']">Phone
+                                    number is
+                                    required</small>
+                                <small class="text-danger" *ngIf="bookingForm.get('phone')?.errors?.['pattern']">Enter a
+                                    valid 10-digit
+                                    number</small>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col-md-4">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" formControlName="email"
+                                placeholder="you@example.com">
+                            <div *ngIf="bookingForm.get('email')?.touched && bookingForm.get('email')?.invalid">
+                                <small class="text-danger" *ngIf="bookingForm.get('email')?.errors?.['required']">Email
+                                    is
+                                    required</small>
+                                <small class="text-danger" *ngIf="bookingForm.get('email')?.errors?.['email']">Enter a
+                                    valid email
+                                    address</small>
+                            </div>
+                        </div>
+                    </form>
+                    <br><br>
+                   
+                    
+                    <div class="card shadow-sm cancellation-policy-panel rounded">
+                        <div class="card-header bg-white p-3 collapsed">
+
+                            <form [formGroup]="termsForm">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input custom-checkbox" formControlName="termsAccepted"
+                                        id="termsAccepted">
+                                    <label class="form-check-label" for="termsAccepted">
+                                        I understand and agree with the
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#fareRulesModal">Fare
+                                            Rules</a>, the
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy
+                                            Policy</a> and
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms &
+                                            Conditions</a> of AirNStay.
+                                    </label>
+                                </div>
+
+                                <div
+                                    *ngIf="termsForm.get('termsAccepted')?.touched && termsForm.get('termsAccepted')?.invalid">
+                                    <small class="text-danger">You must accept the terms to proceed.</small>
+                                </div>
+
+                                <br>
+                            </form>
+
+                            <button class="btn btn-primary btn-lg rounded-pill shadow px-4 py-2 hover-effect"
+                                [disabled]="isDisabled" [ngClass]="{ 'btn-disabled': isDisabled }"
+                                (click)="makePayment(flight.flightId)">
+                                Proceed to Pay 
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 right-section ">
+            <div class="fixedpos">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3 fs-5 fw-semibold">Fare Summary</h5>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted fs-6">Adults ({{ adultCount ||1 }})</span>
+                            <span class="fw-semibold fs-6">{{ (adultCount || 1) * adultFare |
+                                currencyConverter:selectedCurrency
+                                }}</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted fs-6">Children ({{ childCount }})</span>
+                            <span class="fw-semibold fs-6">{{ totalChildFare | currencyConverter:selectedCurrency
+                                }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted fs-6">Taxes and Surcharges</span>
+                            <span class="fw-semibold fs-6">{{ taxes | currencyConverter:selectedCurrency }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3 text-success fw-semibold"
+                            *ngIf="selectedCouponDiscount > 0">
+                            <span class="fs-6">Coupon Applied ({{ selectedCouponCode }})</span>
+                            <span class="fs-6">-{{ selectedCouponDiscount | currencyConverter:selectedCurrency }}</span>
+                            <span> <button class="btn btn-sm btn-link text-danger"
+                                    (click)="removeCoupon()">Remove</button></span>
+                        </div>
+                        <hr class="my-3">
+                        <div class="d-flex justify-content-between align-items-center fw-bold fs-5">
+                            <span>Total Amount</span>
+                            <span>{{ totalAmount | currencyConverter:selectedCurrency }}</span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="card shadow-sm">
+                    <div class="scroll-div-auto ">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3 fs-5 fw-semibold">Coupons and Offers</h5>
+                            <div class="input-group mb-3 input-container">
+                                <input type="text" [(ngModel)]="manualCouponCode" placeholder="Enter coupon code">
+                                <button class="btn btn-primary rounded" (click)="applyManualCoupon()">APPLY</button>
+
+                            </div>
+
+                            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-1">AVAILUPI<span
+                                                class="text-success text-end fw-bold "> ₹300 off</span>
+                                        </h5>
+                                        <p class="card-text text-muted small">Get an instant discount of ₹ 300 on your
+                                            flight and hotel
+                                            booking via UPI</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <button class="btn btn-link text-primary text-decoration-none fw-bold"
+                                            (click)="applyCoupon('AVAILUPI', 300)"> Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-1">FLAT350<span class="text-success text-end fw-bold">
+                                                ₹350 off</span></h5>
+                                        <p class="card-text text-muted small">Get an instant discount of upto ₹ 350 on
+                                            your flight and hotel
+                                            booking via Cards, Net Banking</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <button class="btn btn-link text-primary text-decoration-none fw-bold"
+                                            (click)="applyCoupon('FLAT350', 350)">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-1">HDFC<span class="text-success text-end fw-bold ">
+                                                ₹1000 off</span>
+                                        </h5>
+                                        <p class="card-text text-muted small">Get an instant discount of upto ₹ 1000 on
+                                            your flight and
+                                            hotel booking via HDFC Credit Card</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <button class="btn btn-link text-primary text-decoration-none fw-bold"
+                                            (click)="applyCoupon('HDFC',1000)">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-1">NEW500<span class="text-success text-end fw-bold ">
+                                                ₹500 off</span></h5>
+                                        <p class="card-text text-muted small">Get an instant discount of ₹ 500 on your
+                                            flight and hotel
+                                            booking to new users.</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <button class="btn btn-link text-primary text-decoration-none fw-bold"
+                                            (click)="applyCoupon('NEW500', 500)">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modals for terms-->
+<div class="modal fade" id="fareRulesModal" tabindex="-1" aria-labelledby="fareRulesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content border-primary shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="fareRulesLabel">Fare Rules – Flight Bookings</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p class="mb-3">Please review the following fare rules carefully before confirming your flight booking
+                    with AirNStay:</p>
+
+                <h6 class="text-primary">🎫 Ticket Types</h6>
+                <ul>
+                    <li><strong>Economy Saver:</strong> Non-refundable, no changes allowed.</li>
+                    <li><strong>Economy Flex:</strong> Changes permitted with fee; partial refund on cancellation.</li>
+                    <li><strong>Business Class:</strong> Fully refundable and changeable up to 2 hours before departure.
+                    </li>
+                </ul>
+
+                <h6 class="text-primary mt-4">🔄 Changes & Cancellations</h6>
+                <ul>
+                    <li>Changes must be made at least 24 hours before departure.</li>
+                    <li>Cancellation fees vary by airline and fare type.</li>
+                    <li>No-show passengers are not eligible for refunds.</li>
+                </ul>
+
+                <h6 class="text-primary mt-4">🧳 Baggage Policy</h6>
+                <ul>
+                    <li>Cabin baggage: 7kg limit per passenger.</li>
+                    <li>Checked baggage: 15–30kg depending on fare class.</li>
+                    <li>Excess baggage charges apply at airport counters.</li>
+                </ul>
+
+                <h6 class="text-primary mt-4">🕒 Check-in & Boarding</h6>
+                <ul>
+                    <li>Online check-in opens 48 hours before departure.</li>
+                    <li>Airport check-in closes 60 minutes before departure.</li>
+                    <li>Boarding gates close 20 minutes before departure.</li>
+                </ul>
+
+                <p class="mt-4">By proceeding, you confirm that you understand and accept these fare conditions. For
+                    airline-specific rules, please refer to the carrier’s official website.</p>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content border-secondary shadow">
+            <div class="modal-header bg-secondary text-white">
+                <h5 class="modal-title" id="privacyPolicyLabel">Privacy Policy – AirNStay</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p>AirNStay is committed to protecting your privacy. This policy outlines how we collect, use, and
+                    safeguard your personal information.</p>
+
+                <h6 class="text-secondary">📋 Data We Collect</h6>
+                <ul>
+                    <li>Full name, contact details, and payment information.</li>
+                    <li>Travel preferences and booking history.</li>
+                    <li>Device, browser, and location data for analytics.</li>
+                </ul>
+
+                <h6 class="text-secondary mt-4">🔐 How We Use Your Data</h6>
+                <ul>
+                    <li>To process bookings and payments securely.</li>
+                    <li>To personalize offers and improve user experience.</li>
+                    <li>To comply with legal and regulatory requirements.</li>
+                </ul>
+
+                <h6 class="text-secondary mt-4">🤝 Third-Party Sharing</h6>
+                <ul>
+                    <li>We share data only with airlines, hotels, and payment gateways as required.</li>
+                    <li>We do not sell your data to advertisers or third parties.</li>
+                </ul>
+
+                <p class="mt-4">For full details, please refer to our downloadable Privacy Policy PDF or contact our
+                    support team.</p>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content border-dark shadow">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="termsLabel">Terms & Conditions – AirNStay</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <h6 class="text-dark">📌 General Terms</h6>
+                <ul>
+                    <li>By using AirNStay, you agree to abide by our booking and cancellation policies.</li>
+                    <li>All payments must be made through approved channels.</li>
+                    <li>AirNStay is not liable for delays or cancellations by third-party providers.</li>
+                </ul>
+
+                <h6 class="text-dark mt-4">✈️ Flight Booking Terms</h6>
+                <ul>
+                    <li>Each airline has its own fare rules and baggage policies.</li>
+                    <li>AirNStay acts as a facilitator and does not guarantee service quality.</li>
+                    <li>Disputes must be raised within 7 days of travel completion.</li>
+                </ul>
+
+                <h6 class="text-dark mt-4">👤 User Conduct</h6>
+                <ul>
+                    <li>Users must provide accurate information during booking.</li>
+                    <li>Fraudulent activity will result in account suspension.</li>
+                    <li>Misuse of promotional offers may lead to cancellation.</li>
+                </ul>
+
+                <p class="mt-4">These terms are subject to change. Please review them periodically for updates.</p>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

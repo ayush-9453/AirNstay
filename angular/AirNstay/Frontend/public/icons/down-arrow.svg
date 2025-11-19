@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37.202" height="43.358" viewBox="0 0 37.202 43.358">
+  <g id="down-arrow" transform="translate(1.5 1.5)" opacity="0.85">
+    <path id="Path_154769" data-name="Path 154769" d="M126.261,20a5.13,5.13,0,0,0-5.13,5.13V41.547a3.42,3.42,0,0,1-3.42,3.42H116V25.13A5.13,5.13,0,0,1,121.13,20Z" transform="translate(-110.87 -20)" fill="#cee1f2"/>
+    <line id="Line_8" data-name="Line 8" y2="10.232" transform="translate(29.175 0.159)" fill="none" stroke="#ef6614" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3"/>
+    <path id="Path_154770" data-name="Path 154770" d="M356,100l3.42,3.42,3.42-3.42" transform="translate(-330.349 -93.16)" fill="#ef6614" stroke="#ef6614" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3"/>
+    <path id="Path_154771" data-name="Path 154771" d="M85.072,37.1v6.156h1.71a3.42,3.42,0,0,1,2.052,6.156L75.153,59.674a3.42,3.42,0,0,1-4.1,0L57.368,49.414a3.42,3.42,0,0,1,2.052-6.156h1.71V25.13A5.145,5.145,0,0,1,66.261,20H78.231" transform="translate(-56 -20)" fill="none" stroke="#2196f3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3"/>
+    <g id="Layer_2_00000000915328504605764690000001788982959995525270_" transform="translate(11.125 11.738)">
+      <g id="rupee" transform="translate(0 0)">
+        <path id="Path_154777" data-name="Path 154777" d="M85.831,4.061H83.6a4.851,4.851,0,0,0-1.167-2.419h3.388a.821.821,0,1,0,0-1.641h-10.3a.821.821,0,0,0,0,1.641h3.266a3.252,3.252,0,0,1,3.138,2.419H76.615a.821.821,0,0,0,0,1.641h5.313a3.244,3.244,0,0,1-3.138,2.426h-3.27a.816.816,0,0,0-.6,1.374l6.605,7.11a.819.819,0,0,0,1.213-1.1l-.013-.013L77.4,9.767h1.384A4.894,4.894,0,0,0,83.6,5.7h2.228a.819.819,0,1,0,0-1.638Z" transform="translate(-74.7 0)" fill="#2196f3" stroke="#2196f3" stroke-width="0.8"/>
+      </g>
+    </g>
+  </g>
+</svg>

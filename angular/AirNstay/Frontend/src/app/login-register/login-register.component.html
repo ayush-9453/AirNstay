@@ -1,0 +1,200 @@
+
+<!-- Container for Page Content -->
+<div class="content-holder d-flex">
+
+    <!-- Carousel Holder -->
+    <div class="carousel-holder container-fluid p-0 carousel-wrapper">
+        <!-- Carousel  -->
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <!-- Carousel Items -->
+            <div class="carousel-inner">
+                <div class="carousel-item active" routerLink="/flights">
+                    <img src="/LoginRegister/air1.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Flight Ticket Booking</h5>
+                        <p>Click here to Proceed with Flight Search</p>
+                    </div>
+                </div>
+                <!-- <div class="carousel-item">
+                    <img src="/LoginRegister/hotel1.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block" routerLink="/hotel">
+                        <h5>Hotel Room Booking</h5>
+                        <p>Click here to Proceed with Hotel Search</p>
+                    </div>
+                </div> -->
+                <!-- <div class="carousel-item">
+                    <img src="/LoginRegister/travel3.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block" routerLink="/packages">
+                        <h5>Travel Package Booking</h5>
+                        <p>Click here to Proceed with Package Search</p>
+                    </div>
+                </div> -->
+                <!-- <div class="carousel-item">
+                    <img src="/LoginRegister/air3.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block" routerLink="/flights">
+                        <h5>Flight Ticket Booking</h5>
+                        <p>Click here to Proceed with Flight Search</p>
+                    </div>
+                </div> -->
+                <div class="carousel-item">
+                    <img src="/LoginRegister/hotel4.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block" routerLink="/hotel">
+                        <h5>Hotel Room Booking</h5>
+                        <p>Click here to Proceed with Hotel Search</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/LoginRegister/travel2.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block" routerLink="/packages">
+                        <h5>Travel Package Booking</h5>
+                        <p>Click here to Proceed with Package Search</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousal Controls  -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Login/Register Form Holder -->
+    <div class="login-register-holder container-fluid p-0 d-flex">
+        <!-- Login Form -->
+        <div *ngIf="bLoginRegister==true" class="login-page align-content-center" style="margin-top: 7rem">
+            <div class="login-form-holder">
+                <!-- Login Form Fields -->
+                <form id="loginForm" [formGroup]="loginForm" (submit)="loginUser()">
+                    <h4 class="my-2">Welcome Back</h4> <br>
+
+                    <select formControlName="role">
+                        <option value="" disabled selected hidden>Select Role</option>
+                        <option value="Traveller">Traveller</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Travel Agent">Travel Agent</option>
+                        <option value="Support Agent">Support Agent</option>
+                    </select>
+                    <div class="error-space">
+                        <p class="text-danger" *ngIf="role?.errors?.['required'] && (role?.dirty || role?.touched)">
+                            Select a role
+                        </p>
+                        <p *ngIf="!(role?.errors)">&nbsp;</p>
+                    </div>
+
+                    <input type="text" formControlName="email" placeholder="Enter Email Address">
+                    <div class="error-space">
+                        <p class="text-danger" *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)">
+                            Email cannot be Empty
+                        </p>
+                        <p class="text-danger" *ngIf="email?.errors?.['email'] && (email?.dirty || email?.touched)">
+                            Invalid Email Format
+                        </p>
+                        <p *ngIf="!(email?.errors)">&nbsp;</p>
+                    </div>
+
+                    <input type="password" formControlName="password" placeholder="Enter Password">
+                    <div class="error-space">
+                        <p class="text-danger"
+                            *ngIf="password?.errors?.['required'] && (password?.dirty || password?.touched)">
+                            Password cannot be Empty
+                        </p>
+                        <p class="text-danger"
+                            *ngIf="password?.errors?.['minlength'] && (password?.dirty || password?.touched)">
+                            Minimum Lenght of password is 8
+                        </p>
+                        <p *ngIf="!(password?.errors)">&nbsp;</p>
+                    </div>
+
+                    <button class="btn px-5" type="submit" [ngClass]="loginForm.invalid?'btn-secondary':'btn-primary'" [disabled]="loginForm.invalid">Log In</button><br><br>
+                    <p>Dont have a account ? <a class="text-primary" (click)="toggleLogin()" id="link">Sign Up</a></p>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Registration Form -->
+        <div *ngIf="bLoginRegister==false" class="login-page">
+            <div class="login-form-holder">
+                <!-- Registration Form Fields  -->
+                <form id="registerForm" [formGroup]="registerForm" (submit)="registerUser()">
+                    <h4 class="my-2">Get Started</h4>                                                                                                                     <p></p>
+
+                    <!-- <select formControlName="rrole">
+                        <option value="" disabled selected hidden>Select Role</option>
+                        <!-- <option value="Hotel Manager">Hotel Manager</option> 
+                        <option value="Travel Agent">Travel Agent</option>
+                        <option value="Traveller">Traveller</option>
+                    </select> -->
+                    <!-- <div class="error-space">
+                        <p class="text-danger" *ngIf="rrole?.errors?.['required'] && (rrole?.dirty || rrole?.touched)">
+                            Select a role
+                        </p>
+                        <p *ngIf="!(rrole?.errors?.['required'] && (rrole?.dirty || rrole?.touched))">&nbsp;</p>
+                    </div> -->
+
+                    <input type="text" formControlName="ruserName" placeholder="Enter Full Name">
+                    <div class="error-space">
+                        <p class="text-danger"
+                            *ngIf="ruserName?.errors?.['required'] && (ruserName?.dirty || ruserName?.touched)">
+                            Name cannot be Empty
+                        </p>
+                        <p *ngIf="!(ruserName?.errors)">&nbsp;</p>
+                    </div>
+
+                    <input type="text" formControlName="remail" placeholder="Enter Email Address">
+                    <div class="error-space">
+                        <p class="text-danger"
+                            *ngIf="remail?.errors?.['required'] && (remail?.dirty || remail?.touched)">
+                            Email cannot be Empty
+                        </p>
+                        <p class="text-danger" *ngIf="remail?.errors?.['email'] && (remail?.dirty || remail?.touched)">
+                            Invalid Email Format
+                        </p>
+                        <p *ngIf="!(remail?.errors)">&nbsp;</p>
+                    </div>
+
+                    <input type="password" formControlName="rpassword" placeholder="Create Password">
+                    <div class="error-space">
+                        <p class="text-danger"
+                            *ngIf="rpassword?.errors?.['required'] && (rpassword?.dirty || rpassword?.touched)">
+                            Password cannot be Empty
+                        </p>
+                        <p class="text-danger"
+                            *ngIf="rpassword?.errors?.['minlength'] && (rpassword?.dirty || rpassword?.touched)">
+                            Minimum Lenght of password is 8
+                        </p>
+                        <p *ngIf="!(rpassword?.errors?.['required'] || rpassword?.errors?.['minlength'])">&nbsp;</p>
+                    </div>
+
+                    <input type="password" formControlName="retypepassword" placeholder="Confirm Password">
+                    <div class="error-space">
+                        <p class="text-danger"
+                            *ngIf="retypepassword?.errors?.['required'] && (retypepassword?.dirty || retypepassword?.touched)">
+                            Password cannot be Empty
+                        </p>
+                        <p class="text-danger"
+                            *ngIf="!(retypepassword?.errors?.['required']) && (retypepassword?.errors?.['passwordMismatch'] && (retypepassword?.dirty || retypepassword?.touched))">
+                            Create & Confirm Password do not match
+                        </p>
+                        <p
+                            *ngIf="!(retypepassword?.errors?.['required'] || retypepassword?.errors?.['passwordMismatch'])">
+                            &nbsp;</p>
+                    </div>
+
+                    <button class="btn btn-primary px-5" type="submit"  [ngClass]="registerForm.invalid?'btn-secondary':'btn-primary'" [disabled]="registerForm.invalid">Sign Up</button><br><br>
+                    <p>Already have a account ? <a class="text-primary" (click)="toggleLogin()" id="link">Sign In</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

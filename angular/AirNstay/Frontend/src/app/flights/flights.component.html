@@ -1,0 +1,359 @@
+<app-navbar></app-navbar>
+
+<body>
+
+  <div class="bg">
+    <!-- Flight Search box -->
+    <div class="search">
+      <h2 class="form-head text-center">
+        Book International and Domestic Flights
+      </h2>
+
+      <div class="form-check mx-5">
+        <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1" checked />
+        <label class="form-check-label" for="radioDefault1"> One Way </label>
+      </div>
+
+      <form id="searchDetailsForm" [formGroup]="searchDetailsForm" (submit)="searchForFlight()">
+        <table class="table table-hover d-flex flex-row py-3 fs-5">
+          <tr class="table-details">
+            <td>From</td>
+            <td>
+              <input class="place " type="text" placeholder="Departure" formControlName="departure" />
+
+              <div class="error-container">
+                <div
+                  *ngIf="searchDetailsForm.get('departure')?.errors?.['pattern'] && searchDetailsForm.get('departure')?.touched"
+                  class="text-danger bg-transparent" style="font-size:small;">
+                  Only letters are allowed.
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="table-details">
+            <td>To</td>
+            <td>
+
+              <input class="place" type="text" placeholder="Arrival" formControlName="arrival" />
+
+              <div class="error-container">
+                <div
+                  *ngIf="searchDetailsForm.get('arrival')?.errors?.['pattern'] && searchDetailsForm.get('arrival')?.touched"
+                  class="text-danger bg-transparent" style="font-size:small;">
+                  Only letters are allowed.
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="table-details">
+            <td>Departure Date</td>
+            <td>
+
+              <input class="date bg-transparent" type="date" placeholder="" formControlName="departureDate" />
+            </td>
+          </tr>
+          <tr class="table-details">
+            <td class="fs-5">Class</td>
+            <td class="fs-5">
+              <select class="form-select form-select-lg bg-transparent text-primary" formControlName="classType"
+                style="width: 150px; font-weight: 500; border: none; border: 1px solid black;">
+                <option value="" disabled selected>Select Class</option>
+                <option value="Economy">Economy</option>
+                <option value="Business">Business</option>
+                <option value="First Class">First Class</option>
+              </select>
+
+            </td>
+          </tr>
+        </table>
+        <div class="checkbox">
+          <div class="form-check book-type  px-2 py-1">
+            <input class="form-check-input mx-1" formControlName="passengerType" value="Regular" type="radio"
+              id="radioDefault" checked />
+            <label class="form-check-label fs-6" for="radioDefault">
+              <strong>Regular</strong> <br />
+              <p style="font-size: smaller">Regular Fares</p>
+            </label>
+          </div>
+          <div class="form-check book-type px-2 py-1">
+            <input class="form-check-input mx-1" formControlName="passengerType" value="Student" type="radio"
+              id="radioDefault3" />
+            <label class="form-check-label fs-6" for="radioDefault3">
+              <strong>Student</strong> <br />
+              <p style="font-size: smaller">Extra discounts/baggage</p>
+            </label>
+          </div>
+          <div class="form-check book-type px-2 py-1">
+            <input class="form-check-input mx-1" formControlName="passengerType" value="Senior Citizen" type="radio"
+              id="radioDefault4" />
+            <label class="form-check-label fs-6" for="radioDefault4">
+              <strong>Senior Citizen</strong><br />
+              <p style="font-size: smaller">
+                Upto ₹600 Off
+              </p>
+            </label>
+          </div>
+        </div>
+
+        <button class="search-button btn btn-primary px-5" type="submit">
+          <strong>Search</strong>
+        </button>
+      </form>
+    </div>
+    <div class="explore text-black p-2 px-5">
+      <h4>Explore More About The Places You Dreamed To Travel</h4>
+    </div>
+  </div>
+
+  <!-- Flying best partner display -->
+  <div class="partner">
+    <h1 style="font-size: 35px; font-weight: 500">
+      Experience Flying with our Airline Partners
+    </h1>
+    <div class="partner-image">
+
+      <img src="airAsia.png" alt="" width="500px" height="190px" />
+      <img src="Indigo.png" alt="" width="500px" height="180px" style="margin-top: 10px" />
+      <img src="Qatar.png" alt="" width="500px" height="180px" />
+      <img src="Emirates.png" alt="" width="500px" height="180px" />
+    </div>
+  </div>
+
+  <!-- Best route displaying conatiner -->
+  <div class="top-flight">
+    <h2 class="text-center">Top Flight Routes</h2>
+    <div class="all-best-routes">
+      <div class="best-routes d-flex flex-row fs-5 gap-2">
+
+        <img src="routesImage/mumbai.png" alt="" width="60px" height="60px" style="border-radius: 10px" />
+        <div class="d-flex flex-column">
+          <div class="route d-flex gap-2">
+            <strong>Chennai</strong>
+            <svg style="margin-top: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-airplane" viewBox="0 0 16 16">
+              <path
+                d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+            </svg>
+            <strong>Mumbai</strong>
+          </div>
+          <strong class="text-primary">MAA - BOM</strong>
+        </div>
+      </div>
+      <div class="best-routes d-flex flex-row fs-5 gap-2">
+        <img src="routesImage/ahmedabad.png" alt="" width="60px" height="60px" style="border-radius: 10px" />
+        <div class="d-flex flex-column">
+          <div class="route d-flex gap-2">
+            <strong>Delhi</strong>
+            <svg style="margin-top: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-airplane" viewBox="0 0 16 16">
+              <path
+                d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+            </svg>
+            <strong>Ahmedabad </strong>
+          </div>
+          <strong class="text-primary">DEL - AMD</strong>
+        </div>
+      </div>
+      <div class="best-routes d-flex flex-row fs-5 gap-2">
+        <img src="routesImage/lucknow.png" alt="" width="60px" height="60px" style="border-radius: 10px" />
+        <div class="d-flex flex-column">
+          <div class="route d-flex gap-2">
+            <strong>Delhi</strong>
+            <svg style="margin-top: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-airplane" viewBox="0 0 16 16">
+              <path
+                d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+            </svg>
+            <strong>Lucknow</strong>
+          </div>
+          <strong class="text-primary">DEL - LKO</strong>
+        </div>
+      </div>
+      <div class="best-routes d-flex flex-row fs-5 gap-2">
+        <img src="routesImage/mumbai.png" alt="" width="60px" height="60px" style="border-radius: 10px" />
+        <div class="d-flex flex-column">
+          <div class="route d-flex gap-2">
+            <strong>Mumbai</strong>
+            <svg style="margin-top: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-airplane" viewBox="0 0 16 16">
+              <path
+                d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+            </svg>
+            <strong>Chennai</strong>
+          </div>
+          <strong class="text-primary">BOM - MAA</strong>
+        </div>
+      </div>
+      <div class="best-routes d-flex flex-row fs-5 gap-2">
+        <img src="routesImage/ahmedabad.png" alt="" width="60px" height="60px" style="border-radius: 10px" />
+        <div class="d-flex flex-column">
+          <div class="route d-flex gap-2">
+            <strong>Mumbai</strong>
+            <svg style="margin-top: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-airplane" viewBox="0 0 16 16">
+              <path
+                d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+            </svg>
+            <strong>Dubai</strong>
+          </div>
+          <strong class="text-primary">BOM - DXB</strong>
+        </div>
+      </div>
+      <div class="best-routes d-flex flex-row fs-5 gap-2">
+        <img src="routesImage/lucknow.png" alt="" width="60px" height="60px" style="border-radius: 10px" />
+        <div class="d-flex flex-column">
+          <div class="route d-flex gap-2">
+            <strong>Mumbai</strong>
+            <svg style="margin-top: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-airplane" viewBox="0 0 16 16">
+              <path
+                d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+            </svg>
+            <strong>Kolkata</strong>
+          </div>
+          <strong class="text-primary">BOM - CCU</strong>
+        </div>
+      </div>
+      <div class="best-routes d-flex flex-row fs-5 gap-2">
+
+        <img src="routesImage/mumbai.png" alt="" width="60px" height="60px" style="border-radius: 10px" />
+        <div class="d-flex flex-column">
+          <div class="route d-flex gap-2">
+            <strong>Hyderabad</strong>
+            <svg style="margin-top: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-airplane" viewBox="0 0 16 16">
+              <path
+                d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+            </svg>
+            <strong>Bangalore</strong>
+          </div>
+          <strong class="text-primary">HYD - BLR</strong>
+        </div>
+      </div>
+      <div class="best-routes d-flex flex-row fs-5 gap-2">
+        <img src="routesImage/ahmedabad.png" alt="" width="60px" height="60px" style="border-radius: 10px" />
+        <div class="d-flex flex-column">
+          <div class="route d-flex gap-2">
+            <strong>Mumbai</strong>
+            <svg style="margin-top: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-airplane" viewBox="0 0 16 16">
+              <path
+                d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+            </svg>
+            <strong>Jaipur </strong>
+          </div>
+          <strong class="text-primary">BOM - JAI</strong>
+        </div>
+      </div>
+      <div class="best-routes d-flex flex-row fs-5 gap-2">
+        <img src="routesImage/lucknow.png" alt="" width="60px" height="60px" style="border-radius: 10px" />
+        <div class="d-flex flex-column">
+          <div class="route d-flex gap-2">
+            <strong>Delhi</strong>
+            <svg style="margin-top: 5px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-airplane" viewBox="0 0 16 16">
+              <path
+                d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+            </svg>
+            <strong>Dubai</strong>
+          </div>
+          <strong class="text-primary">DEL - DXB</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="line border border-1 border-black my-5"></div>
+
+  <!-- Famous Tourist Places content -->
+  <h1 style="font-size: 30px; font-weight: bolder; text-align: center">
+    Famous Tourist Attraction
+  </h1>
+  <div class="all-famous">
+    <div class="famous">
+      <img src="places/udaipur.svg" alt="udaipur" width="80px" height="80px" />
+      <p>Udaipur</p>
+    </div>
+    <div class="famous">
+      <img src="places/andaman.png" alt="udaipur" width="80px" height="80px" />
+      <p>Andaman</p>
+    </div>
+    <div class="famous">
+      <img src="places/kashmir.svg" alt="udaipur" width="80px" height="80px" />
+      <p>Kashmir</p>
+    </div>
+    <div class="famous">
+      <img src="places/jaipur.svg" alt="udaipur" width="80px" height="80px" />
+      <p>Jaipur</p>
+    </div>
+    <div class="famous">
+      <img src="places/bangalore.svg" alt="udaipur" width="80px" height="80px" />
+
+      <p>Bengalore</p>
+    </div>
+    <div class="famous">
+      <img src="places/paris.svg" alt="udaipur" width="80px" height="80px" />
+      <p>Paris</p>
+    </div>
+    <div class="famous">
+      <img src="places/leh.svg" alt="udaipur" width="80px" height="80px" />
+      <p>Leh</p>
+    </div>
+    <div class="famous">
+      <img src="places/bali-indonesia.svg" alt="udaipur" width="80px" height="80px" />
+
+      <p>Bali</p>
+    </div>
+    <div class="famous">
+      <img src="places/dubai.svg" alt="udaipur" width="80px" height="80px" />
+      <p>Bengalore</p>
+    </div>
+    <div class="famous">
+      <img src="places/kerala.svg" alt="udaipur" width="80px" height="80px" />
+      <p>Kerala</p>
+    </div>
+  </div>
+
+  <!-- Customer Benefit content -->
+  <div class="benefit-container">
+    <h1 style="font-size: 40px; font-weight: bolder">Why book with us?</h1>
+    <div class="benefit-content">
+      <div class="content">
+        <img src="icons/bag.svg" alt="" width="40px" height="40px" />
+        <p class="fs-5 fw-bold">Easy Booking</p>
+        <p>
+          We offer easy and convenient flight bookings with attractive offers.
+        </p>
+      </div>
+      <div class="content">
+        <img src="icons/down-arrow.svg" alt="" width="40px" height="40px" />
+        <p class="fs-5 fw-bold">Lowest Price</p>
+        <p>
+          We ensure low rates on hotel reservation, holiday packages and on
+          flight tickets.
+        </p>
+      </div>
+      <div class="content">
+        <img src="icons/refund.svg" alt="" width="40px" height="40px" />
+        <p class="fs-5 fw-bold">Instant Refund</p>
+        <p>Get instant refunds effortlessly on your travel bookings with us.</p>
+      </div>
+      <div class="content">
+        <img src="icons/24-support.svg" alt="" width="40px" height="40px" />
+        <p class="fs-5 fw-bold">24/7 Support</p>
+        <p>
+          Get assistance 24/7 on any kind of travel related query. We are happy
+          to assist you.
+        </p>
+      </div>
+      <div class="content">
+        <img src="icons/discount.svg" alt="" width="40px" height="40px" />
+        <p class="fs-5 fw-bold">Exciting Deals</p>
+        <p>
+          Enjoy exciting deals on flights, hotels, buses, car rental and tour
+          packages.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+<app-footer></app-footer>

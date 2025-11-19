@@ -1,0 +1,189 @@
+.hotel-details{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    padding: 10px;
+}
+.hotel-left{
+    width: fit-content;
+    height: fit-content;
+    border-radius: 1px;
+    /* box-shadow: 0.5px 0.5px 8px 0.5px rgb(195, 194, 194); */
+    padding: 10px;
+    border-radius: 20px;
+}
+.hotel-right{
+    width: 500px;
+    height: fit-content;
+    border-radius: 1px;
+    box-shadow: 2px 2px 4px 2px rgb(195, 194, 194);
+    padding: 15px;
+    border-radius: 20px;
+    margin-top: 60px;
+}
+
+.header{
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+.hotel-images{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+
+.amenities{
+    word-spacing: 20px;
+    font-size: 18px;
+}
+
+.benefits{
+    color: rgb(25, 225, 172);
+    font-size: 16px;
+}
+.all-benefits{
+    display: flex;
+    flex-direction: column ;
+    gap: 13px;
+    margin-bottom: 30px;
+}
+
+.price{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.availablerooms{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.map{
+    display: flex;
+    flex-direction: row;
+    margin-block: 25px;
+    box-shadow: 1px 2px 1px 2px rgb(195, 194, 194);
+    border-radius: 25px;
+    padding: 20px;
+    justify-content: space-between;
+}
+.book-button{
+    display: flex;
+    justify-self: stretch;
+    justify-content: center;
+    padding: 10px;
+    font-size: 18px;
+}
+
+
+
+/* Rohit Code */
+
+
+.container-main{
+    background-color: #f0f2f5;
+}
+.container-reviews{
+
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, black, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3 ease;
+}
+
+.reviews{
+    margin-top: 50px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px rgba(0, black, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3 ease;
+}
+.container-allreviews{
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 10px 10px 16px rgba(0, black, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3 ease;
+}
+.container-starrating{
+    width: 100%;
+    background-color: white;
+}
+
+.averagerating{
+    width: 70%;
+    height: 90px;
+}
+.averageLogolable{
+    width: 70px;
+    height: 70px;
+    background-color: #2757ae;
+    border-radius: 25px;
+    padding-top: 10px;
+}
+.progressrating{
+    width: 100%;
+}
+.overallrating{
+    color: #2757ae;
+    font-weight: 600;
+}
+.progress-stick{
+    width: 160px;
+    height: 15px;
+}
+.percentage-value{
+    font-size: small;
+    margin: 2px;
+}
+.progress-label{
+    font-size: 1rem;
+    font-weight: 400;
+}
+.container-summaryreview{
+    width: 100%;
+    background-color: white;
+}
+.summary-label{
+    border: 1px solid #2757ae;
+    width: 40px;
+    height: 35px;
+    font-weight: 700;
+    color: #2757ae;
+}
+.detailedReview-dialoge{
+    border-radius: 10px;
+    background-color:  rgb(245, 243, 243);
+}
+.review-name{
+    border-radius: 10px;
+    background-color:  rgb(245, 243, 243);
+    width: 100%;
+}
+.add-btn,.close-btn{
+    width: 47%;
+}
+.modal-star-review{
+    font-size: 2rem;
+    color: gold;
+}
+.modal-form, .modal-image{
+    border-radius: 8px;
+    height: 100%;
+}
+.SummaryReview-Heading{
+    width: 80%;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.modal-detailed-review, .modal-user {
+    width: 85%;
+
+}

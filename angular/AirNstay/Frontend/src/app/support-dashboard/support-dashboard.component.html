@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-light p-3 bg-light shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bolder text-primary">airNstay</a>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav text-center">
+          <li>
+            <h3>Agent Ticket Dashboard</h3>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <button class="btn btn-white" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Log Out</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+<div class="container-fluid py-4 dashboard-bg">
+    <p class="text-muted lead">Your assigned tickets await action.</p>
+
+    <div *ngIf="SupportTicketData && SupportTicketData.length === 0" class="alert alert-info shadow-sm p-4 text-center">
+        <h4 class="alert-heading"><i class="bi bi-check-circle me-2"></i> All Done!</h4>
+        <p class="mb-0">You currently have no tickets assigned. Great job!</p>
+    </div>
+
+    <div class="card-container"> 
+        <div class="ticket-card" *ngFor="let ticket of SupportTicketData">
+            <div class="card-header">Ticket #{{ ticket.ticketId }}</div>
+
+            <div class="card-content-agent">
+                <p><strong>Customer ID: </strong> <span>{{ ticket.userID }}</span></p>
+                <p><strong>Customer: </strong> <span>{{ ticket.name }}</span></p>
+                <p><strong>Date: </strong> <span>{{ ticket.date | date : 'short'}}</span></p>
+                <p><strong>Issue: </strong>
+                <span class="issue-text-scrollable">
+                    {{ ticket.detailedIssue }}
+                </span></p>       
+            </div>
+
+            <div class="actions">
+                <button class="btn-complete" 
+                        [disabled]="ticket.status === 'Completed'" 
+                        (click)="completeTicket(ticket)">
+                    Complete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

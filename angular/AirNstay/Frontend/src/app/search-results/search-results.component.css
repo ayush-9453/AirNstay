@@ -1,0 +1,209 @@
+/* .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.flight-card{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 40px;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 1200px;
+    background-color: white;
+    justify-content: space-between;
+}
+
+.flight{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.top{
+    font: 30px solid black;
+    font-weight: bolder;
+}
+
+.bottom{
+    font: 20px solid grey;
+} */
+
+
+/* Fullscreen container with margin + padding */
+
+.flight-container {
+    min-height: 400px; /* Reduced height */
+    margin: 0px;
+    padding: 50px;
+    /* background: #f9fafc; */
+    background-image: url(../../../public/flight_search_bg.png);
+    background-size:cover   ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Card styling */
+.flight-card {
+    width: 100%;
+    max-width: 800px;
+    /* keeps it centered and not too wide */
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.flight-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Header */
+.flight-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.airline-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    margin-right: 20px;
+}
+
+.airline-info h3 {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.airline-id {
+    font-size: 16px;
+    color: gray;
+}
+
+/* Flight body spread */
+.flight-body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    /* padding-left: 90px; */
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.time-section{
+    display: flex;
+    flex-direction: column;
+}
+
+.time-section h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.time-section p {
+    font-size: 18px;
+    color: #555;
+}
+
+.flight-duration{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flight-path {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-direction: row;
+}
+
+.line {
+    height: 3px;
+    width: 60px;
+    background: #007bff;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #007bff;
+    border-radius: 50%;
+}
+
+.flight-path p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Footer with space */
+.flight-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.price {
+    font-size: 28px;
+    font-weight: 700;
+    color: #28a745;
+}
+
+.book-btn {
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.sold-btn {
+    background: linear-gradient(135deg, #6f6f6f, #00c6ff);
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: line-through;
+    transition: background 0.3s ease;
+}
+
+.book-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #0094cc);
+}
+
+/* Animation */
+.animate-card {
+    animation: fadeInUp 0.6s ease both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

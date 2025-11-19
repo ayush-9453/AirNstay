@@ -1,0 +1,201 @@
+.navbar {
+  background: linear-gradient(90deg, #1e3c72, #2a5298); /* Deep blue gradient */
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-bottom: none;
+}
+
+.navbar-brand {
+  color: #ffffff !important;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.navbar-nav h3 {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.nav-right .btn {
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.nav-right .btn:hover {
+  background-color: #ffffff;
+  color: #2a5298;
+}
+
+.dashboard-bg {
+    min-height: 100vh;
+    background-color: #f8f8f8; 
+}
+
+/* Custom color for the heading */
+.text-dark-blue {
+    color: #1e3a8a; 
+}
+
+/* --- Adopted CSS Grid from Admin Component (MODIFIED) --- */
+.card-container {
+    margin: 0rem 1rem;
+    display: grid;
+    /* 👇 MODIFIED: This ensures four equal columns (1fr each) on wide screens.
+       We use media queries below to handle smaller screens.
+    */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    padding: 20px;
+}
+
+/* --- Base Card Styling --- */
+.ticket-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+    margin-bottom: 0; /* Removed margin-bottom as gap handles vertical spacing */
+}
+
+.ticket-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Card Header (for Ticket ID) */
+.card-header {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+    background-color: transparent !important;
+    border-bottom: none !important;
+    padding: 0 !important;
+}
+
+/* Card Content Text Styling */
+.card-content-agent p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #555;
+}
+.card-content-agent p span {
+    color: #555;
+}
+
+/* Status Badge styling */
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+}
+
+/* Specific Badge Colors */
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-assigned {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Scrollable issue text box */
+.issue-text-scrollable {
+    height: 3.6em; 
+    overflow-y: auto;
+    line-height: 1.2em;
+    font-size: 14px;
+    color: #444;
+    padding: 4px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+/* WebKit scrollbar styles */
+.issue-text-scrollable::-webkit-scrollbar {
+    width: 6px;
+}
+
+.issue-text-scrollable::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+/* Agent Select Dropdown */
+.card-content-agent select {
+    margin-top: 2px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+/* Actions / Complete Button */
+.actions {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.btn-complete {
+    background-color: #28a745;
+    width: 100%;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-complete:disabled{
+    background-color: #A5D6A7;
+    color: #ffffff;
+    cursor: not-allowed;
+}
+
+.btn-complete:enabled:hover {
+    background-color: #218838;
+}
+
+/* Removed redundant/conflicting Bootstrap padding classes */
+.card-body, .card-footer {
+    padding: 0 !important;
+}
+
+/* --- Media Queries for Responsiveness (Recommended) --- */
+
+/* Tablet/Medium Desktops: 2 tickets per row */
+@media (max-width: 1200px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile/Small Screens: 1 ticket per row */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+}

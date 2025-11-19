@@ -1,0 +1,210 @@
+body {
+  font-family: 'Helvetica', sans-serif;
+  background-color: #f0f2f5; 
+}
+
+.main-content-container {
+  max-width: 1200px; 
+}
+
+.left-section {
+  flex: 2;
+}
+
+.right-section {
+  flex: 1; 
+  min-width: 350px;
+}
+
+.card-title.fs-4 {
+    font-size: 1.5rem !important;
+}
+
+.fs-7 {
+  font-size: 0.8125rem; 
+}
+
+.fw-semibold {
+  font-weight: 600; 
+}
+
+.border-dashed {
+  border: 1px dashed #e0e0e0 !important; 
+}
+
+.flight-timing-section {
+  position: relative;
+  padding-bottom: 10px; 
+  
+}
+.scroll-div-auto {
+     height: 600px;
+    overflow: auto; 
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.active-tab-btn {
+  background-color: #e0f2f7 !important; 
+  color: #003666 !important; 
+  font-weight: 500 !important;
+}
+
+
+.input-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.input-container input {
+  flex-grow: 1; 
+  border: none;
+  outline: none;
+  padding: 5px;
+}
+
+.apply-btn {
+  opacity: 0; 
+  transition: opacity 0.2s ease-in-out; 
+  border: none;
+  background-color: dodgerblue; 
+  color: white;
+  padding: 8px 15px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+
+
+.apply-btn:focus {
+  opacity: 1;
+}
+
+.scroll-div-auto {
+     height: 500px;
+    overflow: auto; 
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+
+.baggage-section {
+  background-color: #eaf6fb;
+  border: 1px dashed #b3d4fc !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.baggage-section i {
+  font-size: 1.2rem;
+}
+
+.baggage-section p {
+  font-size: 0.95rem;
+  color: #003666;
+  font-weight: 500;
+}
+
+.scroll-div-auto {
+  max-height: 400px; 
+  overflow-y: auto;
+}
+.hover-effect {
+  transition: all 0.1s ease-in-out;
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  border: none;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.hover-effect:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(to right, #00f2fe 0%, #4facfe 100%);
+}
+.payment-container {
+  display: grid;
+  gap: 1rem;
+   width: 650px;
+}
+ 
+.paymentBox {
+  height: 80px;
+}
+
+.space-y-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+ 
+/* Responsive grid for MM/YY and CVV inputs */
+.grid.grid-cols-2.gap-3 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.fixedpos{
+  position: fixed;
+  margin-right: 50px;
+  padding-bottom: 50px;
+}
+
+/* Disabled button appearance */
+.btn.btn-disabled,
+.btn:disabled {
+  background-color: #ccc !important;
+  border-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+  background-image: none !important;
+}
+ 
+/* Prevent hover effect on disabled buttons */
+.btn:disabled:hover,
+.btn.btn-disabled:hover {
+  background-color: #ccc !important;
+  border-color: #ccc !important;
+  color: #666 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* For Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.custom-checkbox {
+  border: 1px solid ;
+  border-radius: 4px;
+}
+
+
+.feature-panel {
+  background: #f0f4f8;
+  box-shadow: inset 2px 2px 6px #d1d9e6, inset -2px -2px 6px #ffffff;
+  border: 1px solid #e0e6ed;
+}
+
+.feature-pill {
+  background: #ffffff;
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.05), -2px -2px 6px rgba(255, 255, 255, 0.8);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-pill:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1), -4px -4px 12px rgba(255, 255, 255, 0.9);
+}
